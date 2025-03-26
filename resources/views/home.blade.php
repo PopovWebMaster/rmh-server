@@ -5,6 +5,7 @@
 @endsection
 
 @section('content')
+<h1>Тестовое изменение</h1>
     <div id = "app"></div>
 @endsection
 
