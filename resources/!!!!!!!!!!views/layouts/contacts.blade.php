@@ -1,0 +1,1 @@
+<div id="appContacts" data-folder = "{{ $folderName }}"></div>
