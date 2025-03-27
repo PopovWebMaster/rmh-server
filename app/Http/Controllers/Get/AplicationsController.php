@@ -21,6 +21,9 @@ class AplicationsController extends SiteController
         
         $this->data['robots'] = 'noindex';
         $this->data['pageTitle'] = 'Заявки';
+        $this->data['companyAlias'] = config( 'company.list.1_resp.alias' );
+        $this->data['companyName'] = config( 'company.list.1_resp.name' );
+        $this->data['page'] = 'applications';
 
         // dd( $this->data );
         

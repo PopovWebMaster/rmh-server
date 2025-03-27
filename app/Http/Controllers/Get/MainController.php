@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\SiteController;
-
-class LoginController extends SiteController
+// mainPage.blade
+class MainController extends SiteController
 {
     public function __construct(){
         parent::__construct();
@@ -16,18 +16,18 @@ class LoginController extends SiteController
         
     }
 
-    function get( Request $request ){
+    function get( Request $request, $company ){
 
         
         $this->data['robots'] = 'noindex';
-        $this->data['pageTitle'] = 'Auth';
+        $this->data['pageTitle'] = 'Главная';
         $this->data['companyAlias'] = config( 'company.list.1_resp.alias' );
         $this->data['companyName'] = config( 'company.list.1_resp.name' );
-        $this->data['page'] = 'login';
+        $this->data['page'] = 'main';
 
         // dd( $this->data );
         
-        return view( 'login', $this->data );
+        return view( 'mainPage', $this->data );
 
     }
 }

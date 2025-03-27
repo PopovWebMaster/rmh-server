@@ -22,6 +22,9 @@ class SiteController extends Controller
             'logs',
             'applications',
             'login',
+            'mainPage',
+            'schedulePlan',
+            'scheduleFact',
 
 
 

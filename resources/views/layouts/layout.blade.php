@@ -9,6 +9,14 @@
 
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 
+	<meta name="company-alias" content="{{ $companyAlias }}">
+	<meta name="company-name" content="{{ $companyName }}">
+	<meta name="page" content="{{ $page }}">
+
+
+
+	
+
 
 	<!--этот файл загружается чтоб ослиный браузер понимал html5-->
 	<!--[if lt IE 9]>

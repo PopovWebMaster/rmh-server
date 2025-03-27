@@ -20,13 +20,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::group([
     'middleware' => [ 'api' ],
-    'prefix' => '/{company}',
+    'prefix' => '/',
 ], function ($router) {
     
-    Route::apiResource('/','Api\TestApiController'); 
+    if( !config( 'app.APP_IS_PRODUCTION' ) ){
+        Route::apiResource('/','Api\ApiGetAnyDevelopmentRequests'); 
+    };
 
-
-    
 
 
     // Route::apiResource('/download/png/0/d','ApiDpwnloadPdfController'); 

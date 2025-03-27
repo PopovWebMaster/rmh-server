@@ -7,12 +7,11 @@ use Illuminate\Http\Request;
 
 use App\Http\Controllers\SiteController;
 
-class LoginController extends SiteController
+class ScheduleFactController extends SiteController
 {
     public function __construct(){
         parent::__construct();
         // $this->middleware('auth');
-
         
     }
 
@@ -20,14 +19,14 @@ class LoginController extends SiteController
 
         
         $this->data['robots'] = 'noindex';
-        $this->data['pageTitle'] = 'Auth';
+        $this->data['pageTitle'] = 'Расписание факт';
         $this->data['companyAlias'] = config( 'company.list.1_resp.alias' );
         $this->data['companyName'] = config( 'company.list.1_resp.name' );
-        $this->data['page'] = 'login';
+        $this->data['page'] = 'schedule-fact';
 
         // dd( $this->data );
         
-        return view( 'login', $this->data );
+        return view( 'scheduleFact', $this->data );
 
     }
 }

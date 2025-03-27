@@ -25,6 +25,10 @@ class HomeController extends SiteController
         
         $this->data['robots'] = 'noindex';
         $this->data['pageTitle'] = 'Главная';
+        $this->data['companyAlias'] = config( 'company.list.1_resp.alias' );
+        $this->data['companyName'] = config( 'company.list.1_resp.name' );
+        $this->data['page'] = 'home';
+
 
         // dd( $this->data );
 
