@@ -13,7 +13,7 @@ use App\Http\Controllers\Post\GetStartingData\Traits\GetStartingDataMainTrait;
 use App\Http\Controllers\Post\GetStartingData\Traits\GetStartingDataSchedulePlanTrait;
 use App\Http\Controllers\Post\GetStartingData\Traits\GetStartingDataScheduleFactTrait;
 use App\Http\Controllers\Post\GetStartingData\Traits\GetStartingDataLogsTrait;
-
+use App\Http\Controllers\Post\Login\Traits\LoginUserByPostTrait;
 
 
 
@@ -27,6 +27,7 @@ class ApiGetAnyDevelopmentRequests extends Controller
     use GetStartingDataSchedulePlanTrait;
     use GetStartingDataScheduleFactTrait;
     use GetStartingDataLogsTrait;
+    use LoginUserByPostTrait;
 
     public function store( Request $request )
     {
@@ -64,6 +65,10 @@ class ApiGetAnyDevelopmentRequests extends Controller
                 $result = $this->GetStartingDataLogs( $request, $user );
                 break;
     
+            case 'login-by-post':
+                $result = $this->LoginUserByPost( $request, $user );
+                break;
+
 
 
 

@@ -105,11 +105,11 @@ class AdminController extends SiteController
         // 'name', 'email', 'password',
 
 
-        // Auth::attempt([
-        //     'email' => 'aaa@mail.ru',
-        //     'password' => '111222333',
+        Auth::attempt([
+            'email' => 'aaa@mail.ru',
+            'password' => '111222333',
 
-        // ], true);
+        ], true);
 
 
 
