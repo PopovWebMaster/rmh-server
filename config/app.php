@@ -123,6 +123,11 @@ return [
 
     'cipher' => 'AES-256-CBC',
 
+
+    'admin_email' => env('ADMIN_EMAIL'),
+
+    
+
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers

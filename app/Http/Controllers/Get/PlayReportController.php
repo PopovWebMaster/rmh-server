@@ -7,9 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Controllers\SiteController;
 
-// schedulePlan.blade
-
-class SchedulePlanController extends SiteController
+class PlayReportController extends SiteController
 {
     public function __construct(){
         parent::__construct();
@@ -21,14 +19,14 @@ class SchedulePlanController extends SiteController
 
         
         $this->data['robots'] = 'noindex';
-        $this->data['pageTitle'] = 'Расписание план';
+        $this->data['pageTitle'] = 'Расписание факт';
         $this->data['companyAlias'] = config( 'company.list.1_resp.alias' );
         $this->data['companyName'] = config( 'company.list.1_resp.name' );
-        $this->data['page'] = 'schedule-plan';
+        $this->data['page'] = 'play-report';
 
         // dd( $this->data );
         
-        return view( 'schedulePlan', $this->data );
+        return view( 'playReport', $this->data );
 
     }
 }

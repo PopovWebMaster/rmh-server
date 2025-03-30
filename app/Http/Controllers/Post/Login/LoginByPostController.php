@@ -16,11 +16,16 @@ class LoginByPostController extends Controller
 
         $user = null;
 
+        $result = [ 
+            'ok' => false,
+            'message' => '',
+        ];
+        
         if( Auth::check() ){
-            $user = Auth::user();
+            // $user = Auth::user(); 
+        }else{
+            $result = $this->LoginUserByPost( $request );
         };
-
-        $result = $this->LoginUserByPost( $request, $user );
 
         return response()->json( $result, 200, ['Content-Type' => 'application/json; charset=UTF-8'] );
     }

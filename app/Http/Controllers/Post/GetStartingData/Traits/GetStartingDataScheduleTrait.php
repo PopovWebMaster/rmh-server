@@ -2,15 +2,21 @@
 
 namespace App\Http\Controllers\Post\GetStartingData\Traits;
 
-trait GetStartingDataSchedulePlanTrait{
+use App\Http\Controllers\Traits\UserData\GetUserDataTrait;
 
-    public function GetStartingDataSchedulePlan( $request, $user ){
+trait GetStartingDataScheduleTrait{
+
+    use GetUserDataTrait;
+
+    public function GetStartingDataSchedule( $request, $user ){
 
         $result = [
             'page' => 'schedule-plan',
             'user' =>   $user,
             'data' =>   $request['data'],
         ];
+
+        $result[ 'userData' ] = $this->GetUserData( $request, $user );
 
         return $result;
         

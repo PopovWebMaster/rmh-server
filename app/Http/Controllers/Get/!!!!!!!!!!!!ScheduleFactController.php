@@ -22,11 +22,11 @@ class ScheduleFactController extends SiteController
         $this->data['pageTitle'] = 'Расписание факт';
         $this->data['companyAlias'] = config( 'company.list.1_resp.alias' );
         $this->data['companyName'] = config( 'company.list.1_resp.name' );
-        $this->data['page'] = 'schedule-fact';
+        $this->data['page'] = 'play-report';
 
         // dd( $this->data );
         
-        return view( 'scheduleFact', $this->data );
+        return view( 'playReport', $this->data );
 
     }
 }

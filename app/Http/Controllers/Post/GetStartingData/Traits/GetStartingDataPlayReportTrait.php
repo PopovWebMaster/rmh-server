@@ -2,15 +2,20 @@
 
 namespace App\Http\Controllers\Post\GetStartingData\Traits;
 
-trait GetStartingDataScheduleFactTrait{
+use App\Http\Controllers\Traits\UserData\GetUserDataTrait;
 
-    public function GetStartingDataScheduleFact( $request, $user ){
+trait GetStartingDataPlayReportTrait{
+    use GetUserDataTrait;
+
+    public function GetStartingDataPlayReport( $request, $user ){
 
         $result = [
             'page' => 'schedule-fact',
             'user' =>   $user,
             'data' =>   $request['data'],
         ];
+
+        $result[ 'userData' ] = $this->GetUserData( $request, $user );
 
         return $result;
         

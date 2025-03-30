@@ -23,8 +23,11 @@ class SiteController extends Controller
             'applications',
             'login',
             'mainPage',
-            'schedulePlan',
-            'scheduleFact',
+            'schedule',
+            'playReport',
+            'accessIsClosed',
+            'pageNotFound',
+
 
 
 

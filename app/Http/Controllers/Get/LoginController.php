@@ -7,8 +7,14 @@ use Illuminate\Http\Request;
 
 use App\Http\Controllers\SiteController;
 
+use App\Http\Controllers\Traits\UserData\GetUserDataTrait;
+
+use Auth;
+
 class LoginController extends SiteController
 {
+    use GetUserDataTrait;
+
     public function __construct(){
         parent::__construct();
         // $this->middleware('auth');
@@ -18,16 +24,29 @@ class LoginController extends SiteController
 
     function get( Request $request ){
 
-        
-        $this->data['robots'] = 'noindex';
-        $this->data['pageTitle'] = 'Auth';
-        $this->data['companyAlias'] = config( 'company.list.1_resp.alias' );
-        $this->data['companyName'] = config( 'company.list.1_resp.name' );
-        $this->data['page'] = 'login';
+        if( Auth::check() ){
+            $user = Auth::user(); 
+            $userData = $this->GetUserData( $request, $user );
+            if( $userData[ 'position' ] === 'admin' ){
+                return redirect()->route( 'home' );
+            }else{
+                $company = $userData[ 'company' ][0];
+                return redirect()->route( 'main', [ 'company' => $company ] );
+            };
 
-        // dd( $this->data );
+        }else{
+
+            $this->data['robots'] = 'noindex';
+            $this->data['pageTitle'] = 'Login';
+            $this->data['companyAlias'] = '';
+            $this->data['companyName'] = '';
+            $this->data['page'] = 'login';
+            
+            return view( 'login', $this->data );
+        };
+
         
-        return view( 'login', $this->data );
+
 
     }
 }

@@ -5,14 +5,21 @@ namespace App\Http\Controllers\Post\Login\Traits;
 use Validator;
 use Illuminate\Validation\Rule;
 
+use App\User;
+use Auth;
+
+use App\Http\Controllers\Traits\UserData\GetUserDataTrait;
+
+
 trait LoginUserByPostTrait{
 
-    public function LoginUserByPost( $request, $user ){
+    use GetUserDataTrait;
+
+    public function LoginUserByPost( $request ){
 
         $result = [
             'ok' => false,
             'message' => '',
-
         ];
 
         $email =    isset( $request['data']['email'] )? htmlspecialchars( $request['data']['email'] ): null;
@@ -21,7 +28,6 @@ trait LoginUserByPostTrait{
         $validate = Validator::make( [ 
             'email' => $email,
             'password' => $password,
-
         ], [
             'email' => [ 'required', 'email', 'exists:users,email', ],
             'password' => [ 'required', 'string', 'min:8', 'max:20',],
@@ -31,20 +37,25 @@ trait LoginUserByPostTrait{
             $result[ 'message' ] = $validate->getMessageBag()->all();
         }else{
 
-            if( $user !== null ){
-                $result[ 'message' ] = 'Пользователь уже авторизирован. Ничего не делаю';
+            $authresult = Auth::attempt([
+                'email' => $email,
+                'password' => $password,
+            ], true );
+
+            if( $authresult ){
+                $result[ 'ok' ] = true;
+                $result[ 'message' ] = '';
+
+                $user = User::where( 'email', '=', $email )->first();
+
+                $result[ 'userData' ] = $this->GetUserData( $request, $user );
+
             }else{
-                $result[ 'message' ] = 'Здесь должна быть авторизация';
+                $result[ 'message' ] = 'Не правильные логин или пароль';
             };
+
+                
         };
-
-        $result[ 'user' ] = $user;
-        $result[ 'email' ] = $email;
-        $result[ 'password' ] = $password;
-
-
-
-
 
         return $result;
         

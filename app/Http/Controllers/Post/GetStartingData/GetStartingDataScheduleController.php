@@ -6,11 +6,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use Auth;
-use App\Http\Controllers\Post\GetStartingData\Traits\GetStartingDataScheduleFactTrait;
+use App\Http\Controllers\Post\GetStartingData\Traits\GetStartingDataScheduleTrait;
 
-class GetStartingDataScheduleFactController extends Controller
+class GetStartingDataScheduleController extends Controller
 {
-    use GetStartingDataScheduleFactTrait;
+    use GetStartingDataScheduleTrait;
 
     public function post( Request $request ){
 
@@ -20,7 +20,7 @@ class GetStartingDataScheduleFactController extends Controller
             $user = Auth::user();
         };
 
-        $result = $this->GetStartingDataScheduleFact( $request, $user );
+        $result = $this->GetStartingDataSchedule( $request, $user );
 
         return response()->json( $result, 200, ['Content-Type' => 'application/json; charset=UTF-8'] );
     }

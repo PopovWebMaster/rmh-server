@@ -1,7 +1,7 @@
 @extends('layouts.layout')
 
 @section('link_css')
-    <link href= {{ $css_schedulePlan }} rel="stylesheet">
+    <link href= {{ $css_schedule }} rel="stylesheet">
 @endsection
 
 @section('content')
@@ -13,5 +13,5 @@
 
 
 @section('script_js')
-    <script type="text/javascript" src={{ $js_schedulePlan }}></script>
+    <script type="text/javascript" src={{ $js_schedule }}></script>
 @endsection 

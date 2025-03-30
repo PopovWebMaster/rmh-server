@@ -10,8 +10,8 @@ use App\User;
 use App\Http\Controllers\Post\GetStartingData\Traits\GetStartingDataLoginTrait;
 use App\Http\Controllers\Post\GetStartingData\Traits\GetStartingDataHomeTrait;
 use App\Http\Controllers\Post\GetStartingData\Traits\GetStartingDataMainTrait;
-use App\Http\Controllers\Post\GetStartingData\Traits\GetStartingDataSchedulePlanTrait;
-use App\Http\Controllers\Post\GetStartingData\Traits\GetStartingDataScheduleFactTrait;
+use App\Http\Controllers\Post\GetStartingData\Traits\GetStartingDataScheduleTrait;
+use App\Http\Controllers\Post\GetStartingData\Traits\GetStartingDataPlayReportTrait;
 use App\Http\Controllers\Post\GetStartingData\Traits\GetStartingDataLogsTrait;
 use App\Http\Controllers\Post\Login\Traits\LoginUserByPostTrait;
 
@@ -24,8 +24,8 @@ class ApiGetAnyDevelopmentRequests extends Controller
     use GetStartingDataLoginTrait;
     use GetStartingDataHomeTrait;
     use GetStartingDataMainTrait;
-    use GetStartingDataSchedulePlanTrait;
-    use GetStartingDataScheduleFactTrait;
+    use GetStartingDataScheduleTrait;
+    use GetStartingDataPlayReportTrait;
     use GetStartingDataLogsTrait;
     use LoginUserByPostTrait;
 
@@ -41,7 +41,7 @@ class ApiGetAnyDevelopmentRequests extends Controller
 
         switch( $route ){
 
-            case 'get-starting-data/':
+            case 'get-starting-data/home':
                 $result = $this->GetStartingDataHome( $request, $user );
                 break;
 
@@ -53,12 +53,12 @@ class ApiGetAnyDevelopmentRequests extends Controller
                 $result = $this->GetStartingDataMain( $request, $user );
                 break;
 
-            case 'get-starting-data/schedule-plan':
-                $result = $this->GetStartingDataSchedulePlan( $request, $user );
+            case 'get-starting-data/schedule':
+                $result = $this->GetStartingDataSchedule( $request, $user );
                 break;
 
-            case 'get-starting-data/schedule-fact':
-                $result = $this->GetStartingDataScheduleFact( $request, $user );
+            case 'get-starting-data/play-report':
+                $result = $this->GetStartingDataPlayReport( $request, $user );
                 break;
 
             case 'get-starting-data/logs':
@@ -66,7 +66,7 @@ class ApiGetAnyDevelopmentRequests extends Controller
                 break;
     
             case 'login-by-post':
-                $result = $this->LoginUserByPost( $request, $user );
+                $result = $this->LoginUserByPost( $request );
                 break;
 
 
