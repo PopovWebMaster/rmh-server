@@ -11,11 +11,9 @@
 
 	<meta name="company-alias" content="{{ $companyAlias }}">
 	<meta name="company-name" content="{{ $companyName }}">
+	<meta name="company-type" content="{{ $companyType }}">
+
 	<meta name="page" content="{{ $page }}">
-
-
-
-	
 
 
 	<!--этот файл загружается чтоб ослиный браузер понимал html5-->

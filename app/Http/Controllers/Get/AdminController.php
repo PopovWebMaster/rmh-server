@@ -33,12 +33,13 @@ class AdminController extends SiteController
         $this->data['pageTitle'] = 'Админка';
         $this->data['companyAlias'] = config( 'company.list.1_resp.alias' );
         $this->data['companyName'] = config( 'company.list.1_resp.name' );
+        $this->data['companyType'] = 'tv';
         $this->data['page'] = 'admin';
 
 
 
-        /*
         
+   /*     
         $company = new Company;
         $company->name = 'Первый республиканский';
         $company->alias = '1-resp';
@@ -52,6 +53,8 @@ class AdminController extends SiteController
         $company_2->type = 'tv';
 
         $company_2->save();
+
+        dd('11');
 */
 
 /*

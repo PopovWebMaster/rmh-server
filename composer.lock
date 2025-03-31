@@ -6447,8 +6447,5 @@
         "php": "^7.2.5|^8.0"
     },
     "platform-dev": [],
-    "platform-overrides": {
-        "php": "7.4.29"
-    },
     "plugin-api-version": "2.3.0"
 }

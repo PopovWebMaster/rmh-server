@@ -53,6 +53,7 @@ class MainController extends SiteController
                 if( $validateAccessRight[ 'fails' ]){
                     $this->data['companyAlias'] = $company;
                     $this->data['companyName'] = '';
+                    $this->data['companyType'] = '';
                     $this->data['page'] = 'access-is-closed';
                     return view( 'accessIsClosed', $this->data );
 
@@ -61,6 +62,7 @@ class MainController extends SiteController
 
                     $this->data['companyAlias'] = $company;
                     $this->data['companyName'] = $companyModel->name;
+                    $this->data['companyType'] = $companyModel->type;
 
                     $this->data['page'] = 'main';
                     return view( 'mainPage', $this->data );

@@ -2,6 +2,8 @@
 
 
 Route::get('/login', [ 'uses' => 'Get\LoginController@get' ])->name('login');
+Route::get('/logout', [ 'uses' => 'Get\LogoutController@get' ])->name('logout');
+
 
 Route::prefix('/')->middleware( [ 'web' ] )->group(function ($router) {
 

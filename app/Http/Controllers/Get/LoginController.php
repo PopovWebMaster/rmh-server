@@ -40,6 +40,7 @@ class LoginController extends SiteController
             $this->data['pageTitle'] = 'Login';
             $this->data['companyAlias'] = '';
             $this->data['companyName'] = '';
+            $this->data['companyType'] = '';
             $this->data['page'] = 'login';
             
             return view( 'login', $this->data );

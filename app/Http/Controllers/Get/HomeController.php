@@ -36,6 +36,7 @@ class HomeController extends SiteController
             $this->data['pageTitle'] = 'Главная';
             $this->data['companyAlias'] = '';
             $this->data['companyName'] = '';
+            $this->data['companyType'] = '';
 
             if( $validateAccessRight[ 'fails' ]){
 
@@ -46,6 +47,7 @@ class HomeController extends SiteController
 
                 $this->data['companyAlias'] = $company->alias;
                 $this->data['companyName'] = $company->name;
+                $this->data['companyType'] = $company->type;
                 $this->data['page'] = 'access-is-closed';
 
                 return view( 'accessIsClosed', $this->data );

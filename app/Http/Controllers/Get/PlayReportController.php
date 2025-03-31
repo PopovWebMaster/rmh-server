@@ -22,6 +22,7 @@ class PlayReportController extends SiteController
         $this->data['pageTitle'] = 'Расписание факт';
         $this->data['companyAlias'] = config( 'company.list.1_resp.alias' );
         $this->data['companyName'] = config( 'company.list.1_resp.name' );
+        $this->data['companyType'] = 'tv';
         $this->data['page'] = 'play-report';
 
         // dd( $this->data );
