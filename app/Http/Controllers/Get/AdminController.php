@@ -11,6 +11,9 @@ use App\User;
 
 use App\Models\Company;
 use App\Models\UserCompany;
+use App\Models\CompanyProgramSystem;
+
+
 
 
 use Auth;
@@ -35,6 +38,29 @@ class AdminController extends SiteController
         $this->data['companyName'] = config( 'company.list.1_resp.name' );
         $this->data['companyType'] = 'tv';
         $this->data['page'] = 'admin';
+
+
+
+/*
+        $companyProgramSystem_1resp = new CompanyProgramSystem;
+        $companyProgramSystem_1resp->company_id = 1;
+        $companyProgramSystem_1resp->name = 'Forward-TA';
+        $companyProgramSystem_1resp->save();
+
+        $companyProgramSystem_oplot = new CompanyProgramSystem;
+        $companyProgramSystem_oplot->company_id = 1;
+        $companyProgramSystem_oplot->name = 'Forward-TA';
+        $companyProgramSystem_oplot->save();
+*/
+
+
+
+
+
+
+
+
+
 
 
 

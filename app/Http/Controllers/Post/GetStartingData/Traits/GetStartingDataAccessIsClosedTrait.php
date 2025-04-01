@@ -9,19 +9,22 @@ use App\Http\Controllers\Traits\ValidateData\ValidateCompanyAliasTrait;
 use Validator;
 use Illuminate\Validation\Rule;
 
-trait GetStartingDataMainTrait{
+trait GetStartingDataAccessIsClosedTrait{
 
     use GetUserDataTrait;
     use ValidateAccessRightCompanyAffiliationTrait;
     use ValidateCompanyAliasTrait;
 
-    public function GetStartingDataMain( $request, $user ){
+    public function GetStartingDataAccessIsClosed( $request, $user ){
 
         $result = [
-            'ok' => false,
+            'ok' => true,
             'message' => '',
         ];
 
+        $result[ 'userData' ] = $this->GetUserData( $request, $user );
+
+/*
         $companyAlias = isset( $request['data']['companyAlias'] )? htmlspecialchars( $request['data']['companyAlias'] ): null;
 
         $validateCompanyAlias = $this->ValidateCompanyAlias( $companyAlias );
@@ -29,6 +32,7 @@ trait GetStartingDataMainTrait{
             $result[ 'message' ] = $validateCompanyAlias[ 'message' ];
 
         }else{
+
             $validateAccessRight = $this->ValidateAccessRightCompanyAffiliation( $companyAlias, $user );
 
             if( $validateAccessRight[ 'fails' ] ){
@@ -37,12 +41,13 @@ trait GetStartingDataMainTrait{
                 $result[ 'ok' ] = true;
                 $result[ 'userData' ] = $this->GetUserData( $request, $user );
                 
+                
             };
 
         };
-
+*/
         return $result;
-        
+
     }
 
 }

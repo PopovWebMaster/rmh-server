@@ -14,7 +14,7 @@ use App\Http\Controllers\Post\GetStartingData\Traits\GetStartingDataScheduleTrai
 use App\Http\Controllers\Post\GetStartingData\Traits\GetStartingDataPlayReportTrait;
 use App\Http\Controllers\Post\GetStartingData\Traits\GetStartingDataLogsTrait;
 use App\Http\Controllers\Post\Login\Traits\LoginUserByPostTrait;
-
+use App\Http\Controllers\Post\GetStartingData\Traits\GetStartingDataAccessIsClosedTrait;
 
 
 
@@ -28,6 +28,7 @@ class ApiGetAnyDevelopmentRequests extends Controller
     use GetStartingDataPlayReportTrait;
     use GetStartingDataLogsTrait;
     use LoginUserByPostTrait;
+    use GetStartingDataAccessIsClosedTrait;
 
     public function store( Request $request )
     {
@@ -63,6 +64,10 @@ class ApiGetAnyDevelopmentRequests extends Controller
 
             case 'get-starting-data/logs':
                 $result = $this->GetStartingDataLogs( $request, $user );
+                break;
+
+            case 'get-starting-data/access-is-closed':
+                $result = $this->GetStartingDataAccessIsClosed( $request, $user );
                 break;
     
             case 'login-by-post':

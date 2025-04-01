@@ -40,10 +40,14 @@ class HomeController extends SiteController
 
             if( $validateAccessRight[ 'fails' ]){
 
+                
+
                 $user_id = $user->id;
                 $userCompany = UserCompany::where( 'user_id', '=', $user_id )->first();
-                $company_id = $userCompany->userCompany;
+                $company_id = $userCompany->company_id;
                 $company = Company::find( $company_id );
+
+                // dd( $company  );
 
                 $this->data['companyAlias'] = $company->alias;
                 $this->data['companyName'] = $company->name;

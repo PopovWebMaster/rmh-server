@@ -20,7 +20,6 @@ trait GetUserDataTrait{
             $user_position = 'admin';
         };
 
-
         $companyAliasList = [];
 
         $userCompany = UserCompany::where( 'user_id', '=', $user_id )->get();
@@ -32,16 +31,27 @@ trait GetUserDataTrait{
         };
 
         $result = [
-            'id' =>         $user_id,
-            'name' =>       $user_name,
-            'email' =>      $user_email,
-            'position' =>   $user_position,
-            'company' =>    $companyAliasList,
-
+            'id' =>             $user_id,
+            'name' =>           $user_name,
+            'email' =>          $user_email,
+            'position' =>       $user_position,
+            'company' =>        $companyAliasList,
+            'accessRights' =>   $this->GetUserAccessRightsList( $user ),
         ];
 
         return $result;
         
+    }
+
+    private function GetUserAccessRightsList( $user ){
+        return [
+            config( 'access_rights.logs.see_page.action' ),
+            config( 'access_rights.logs.add_files.action' ),
+            config( 'access_rights.logs.deleting_files.action' ),
+            config( 'access_rights.logs.add_to_report.action' ),
+
+        ];
+
     }
 
 }

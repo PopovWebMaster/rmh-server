@@ -13,7 +13,6 @@ use App\Http\Controllers\Traits\ValidateData\ValidateCompanyAliasTrait;
 use App\Http\Controllers\Traits\ValidateAccessRight\ValidateAccessRightCompanyAffiliationTrait;
 
 use Auth;
-
 use App\Models\Company;
 
 class MainController extends SiteController
@@ -30,8 +29,6 @@ class MainController extends SiteController
 
     function get( Request $request, $company ){
 
-        
-
         $validate = $this->ValidateCompanyAlias( $company );
 
         if( $validate[ 'fails' ] ){
@@ -44,9 +41,6 @@ class MainController extends SiteController
             if( Auth::check() ){
 
                 $user = Auth::user();
-
-                $this->data['robots'] = 'noindex';
-                $this->data['pageTitle'] = 'Главная';
 
                 $validateAccessRight = $this->ValidateAccessRightCompanyAffiliation( $company, $user );
 
