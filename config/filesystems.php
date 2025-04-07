@@ -77,6 +77,16 @@ return [
             'visibility' => 'public',
         ],
 
+        'play_report' => [
+            'driver' => 'local',
+            'root'   => storage_path('app/private/play_report/'),
+            // 'visibility' => 'public',
+            'visibility' => 'private',
+
+
+            
+        ],
+
         // 'layout_sheet' => [
         //     'driver' => 'local',
         //     'root'   => storage_path('app/public/layout_sheet/'),

@@ -16,7 +16,7 @@ use App\Http\Controllers\Post\GetStartingData\Traits\GetStartingDataLogsTrait;
 use App\Http\Controllers\Post\Login\Traits\LoginUserByPostTrait;
 use App\Http\Controllers\Post\GetStartingData\Traits\GetStartingDataAccessIsClosedTrait;
 
-
+use App\Http\Controllers\Post\Logs\Traits\AddPlayReportTrait;
 
 
 class ApiGetAnyDevelopmentRequests extends Controller
@@ -29,6 +29,7 @@ class ApiGetAnyDevelopmentRequests extends Controller
     use GetStartingDataLogsTrait;
     use LoginUserByPostTrait;
     use GetStartingDataAccessIsClosedTrait;
+    use AddPlayReportTrait;
 
     public function store( Request $request )
     {
@@ -73,6 +74,13 @@ class ApiGetAnyDevelopmentRequests extends Controller
             case 'login-by-post':
                 $result = $this->LoginUserByPost( $request );
                 break;
+
+            case 'logs/add-play-report':
+                $result = $this->AddPlayReport( $request, $user );
+                break;
+
+
+
 
 
 

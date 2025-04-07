@@ -20,16 +20,8 @@ Route::prefix('/')->middleware( [ 'web' ] )->group(function ($router) {
 
     });
 
-    // Route::post('/get-starting-data/home',          [ 'uses' => 'Post\GetStartingData\GetStartingDataHomeController@post' ]);
-    // Route::post('/get-starting-data/login',         [ 'uses' => 'Post\GetStartingData\GetStartingDataLoginController@post' ]);
-    // Route::post('/get-starting-data/main',          [ 'uses' => 'Post\GetStartingData\GetStartingDataMainController@post' ]);
-    // Route::post('/get-starting-data/schedule',      [ 'uses' => 'Post\GetStartingData\GetStartingDataScheduleController@post' ]);
-    // Route::post('/get-starting-data/play-report',   [ 'uses' => 'Post\GetStartingData\GetStartingDataPlayReportController@post' ]);
-    // Route::post('/get-starting-data/logs',          [ 'uses' => 'Post\GetStartingData\GetStartingDataLogsController@post' ]);
-    
-    
-    Route::post('/login-by-post', [ 'uses' => 'Post\Login\LoginByPostController@post' ]);
-    
+    Route::post('/login-by-post',       [ 'uses' => 'Post\Login\LoginByPostController@post' ]);
+    Route::post('logs/add-play-report', [ 'uses' => 'Post\Logs\AddPlayReportController@post' ]);
 
 
 });
