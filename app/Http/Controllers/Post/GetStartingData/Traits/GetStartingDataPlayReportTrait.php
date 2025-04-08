@@ -9,6 +9,8 @@ use App\Http\Controllers\Traits\ValidateData\ValidateCompanyAliasTrait;
 use Validator;
 use Illuminate\Validation\Rule;
 
+use Storage;
+
 trait GetStartingDataPlayReportTrait{
 
     use GetUserDataTrait;
@@ -37,6 +39,8 @@ trait GetStartingDataPlayReportTrait{
             }else{
                 $result[ 'ok' ] = true;
                 $result[ 'userData' ] = $this->GetUserData( $request, $user );
+
+                $result[ 'files' ] = Storage::disk('play_report')->files( $companyAlias );
                 
                 
             };
