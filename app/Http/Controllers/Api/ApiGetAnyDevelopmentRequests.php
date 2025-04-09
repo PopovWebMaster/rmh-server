@@ -17,6 +17,7 @@ use App\Http\Controllers\Post\Login\Traits\LoginUserByPostTrait;
 use App\Http\Controllers\Post\GetStartingData\Traits\GetStartingDataAccessIsClosedTrait;
 
 use App\Http\Controllers\Post\Logs\Traits\AddPlayReportTrait;
+use App\Http\Controllers\Post\PlayReport\Traits\GetOneDayPlayReportListTrait;
 
 
 class ApiGetAnyDevelopmentRequests extends Controller
@@ -30,6 +31,7 @@ class ApiGetAnyDevelopmentRequests extends Controller
     use LoginUserByPostTrait;
     use GetStartingDataAccessIsClosedTrait;
     use AddPlayReportTrait;
+    use GetOneDayPlayReportListTrait;
 
     public function store( Request $request )
     {
@@ -79,6 +81,10 @@ class ApiGetAnyDevelopmentRequests extends Controller
                 $result = $this->AddPlayReport( $request, $user );
                 break;
 
+
+            case 'play-report/get-one-day-entire-list':
+                $result = $this->GetOneDayPlayReportList( $request, $user );
+                break;
 
 
 
