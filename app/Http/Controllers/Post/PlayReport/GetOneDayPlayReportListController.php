@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\Post\Logs;
+namespace App\Http\Controllers\Post\PlayReport;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use Auth;
-use App\Http\Controllers\Post\Logs\Traits\AddPlayReportTrait;
+use App\Http\Controllers\Post\PlayReport\Traits\GetOneDayPlayReportListTrait;
 
-class AddPlayReportController extends Controller
+class GetOneDayPlayReportListController extends Controller
 {
-    use AddPlayReportTrait;
+    use GetOneDayPlayReportListTrait;
 
     public function post( Request $request ){
 
@@ -20,7 +20,7 @@ class AddPlayReportController extends Controller
             $user = Auth::user();
         };
 
-        $result = $this->AddPlayReport( $request, $user );
+        $result = $this->GetOneDayPlayReportList( $request, $user );
 
         return response()->json( $result, 200, ['Content-Type' => 'application/json; charset=UTF-8'] );
     }

@@ -18,6 +18,8 @@ use App\Http\Controllers\Post\GetStartingData\Traits\GetStartingDataAccessIsClos
 
 use App\Http\Controllers\Post\Logs\Traits\AddPlayReportTrait;
 use App\Http\Controllers\Post\PlayReport\Traits\GetOneDayPlayReportListTrait;
+use App\Http\Controllers\Post\PlayReport\Traits\GetEntierListForSearchValueTrait;
+
 
 
 class ApiGetAnyDevelopmentRequests extends Controller
@@ -32,6 +34,7 @@ class ApiGetAnyDevelopmentRequests extends Controller
     use GetStartingDataAccessIsClosedTrait;
     use AddPlayReportTrait;
     use GetOneDayPlayReportListTrait;
+    use GetEntierListForSearchValueTrait;
 
     public function store( Request $request )
     {
@@ -86,7 +89,9 @@ class ApiGetAnyDevelopmentRequests extends Controller
                 $result = $this->GetOneDayPlayReportList( $request, $user );
                 break;
 
-
+            case 'play-report/get-entier-list-for-search-value':
+                $result = $this->GetEntierListForSearchValue( $request, $user );
+                break;
 
 
 

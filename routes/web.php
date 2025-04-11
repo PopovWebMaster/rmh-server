@@ -24,6 +24,10 @@ Route::prefix('/')->middleware( [ 'web' ] )->group(function ($router) {
     Route::post('logs/add-play-report', [ 'uses' => 'Post\Logs\AddPlayReportController@post' ]);
 
 
+    Route::post('play-report/get-one-day-entire-list', [ 'uses' => 'Post\PlayReport\GetOneDayPlayReportListController@post' ]);
+
+
+
 });
 
    
