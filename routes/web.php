@@ -25,7 +25,7 @@ Route::prefix('/')->middleware( [ 'web' ] )->group(function ($router) {
 
 
     Route::post('play-report/get-one-day-entire-list', [ 'uses' => 'Post\PlayReport\GetOneDayPlayReportListController@post' ]);
-
+    Route::post('play-report/get-entier-list-for-search-value', [ 'uses' => 'Post\PlayReport\GetEntierListForSearchValueController@post' ]);
 
 
 });

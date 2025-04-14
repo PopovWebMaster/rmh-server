@@ -45,13 +45,17 @@ trait GetOneDayPlayReportListTrait{
             }else{
                 $result[ 'ok' ] = true;
 
-                $date = $request[ 'data' ][ 'date' ];
-                $month = $request[ 'data' ][ 'month' ];
-                $year = $request[ 'data' ][ 'year' ];
+                // $date = $request[ 'data' ][ 'date' ];
+                // $month = $request[ 'data' ][ 'month' ];
+                // $year = $request[ 'data' ][ 'year' ];
+
+                $date_string = $request[ 'data' ][ 'date_string' ];
 
                 $result[ 'list' ] = [];
                 
-                $file = $companyAlias.'/'.$year.'-'.$month.'-'.$date.'.json';
+                // $file = $companyAlias.'/'.$year.'-'.$month.'-'.$date.'.json';
+                $file = $companyAlias.'/'.$date_string.'.json';
+
 
                 // $result[ 'file' ] = $file;
 
