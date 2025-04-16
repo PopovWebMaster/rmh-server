@@ -9,6 +9,8 @@ Route::prefix('/get-starting-data')->middleware( [ 'web' ] )->group(function ($r
     Route::post('/play-report',         [ 'uses' => 'Post\GetStartingData\GetStartingDataPlayReportController@post' ]);
     Route::post('/logs',                [ 'uses' => 'Post\GetStartingData\GetStartingDataLogsController@post' ]);
     Route::post('/access-is-closed',    [ 'uses' => 'Post\GetStartingData\GetStartingDataAccessIsClosedController@post' ]);
+    Route::post('/layout',              [ 'uses' => 'Post\GetStartingData\GetStartingDataLayoutController@post' ]);
+
 
 
     

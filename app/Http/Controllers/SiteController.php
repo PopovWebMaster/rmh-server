@@ -27,6 +27,7 @@ class SiteController extends Controller
             'playReport',
             'accessIsClosed',
             'pageNotFound',
+            'layout',
 
 
 
