@@ -21,7 +21,7 @@ use App\Http\Controllers\Post\GetStartingData\Traits\GetStartingDataAccessIsClos
 use App\Http\Controllers\Post\Logs\Traits\AddPlayReportTrait;
 use App\Http\Controllers\Post\PlayReport\Traits\GetOneDayPlayReportListTrait;
 use App\Http\Controllers\Post\PlayReport\Traits\GetEntierListForSearchValueTrait;
-
+use App\Http\Controllers\Post\Layout\Traits\SaveKeyPointListTrait;
 
 
 class ApiGetAnyDevelopmentRequests extends Controller
@@ -38,6 +38,7 @@ class ApiGetAnyDevelopmentRequests extends Controller
     use AddPlayReportTrait;
     use GetOneDayPlayReportListTrait;
     use GetEntierListForSearchValueTrait;
+    use SaveKeyPointListTrait;
 
     public function store( Request $request )
     {
@@ -100,6 +101,11 @@ class ApiGetAnyDevelopmentRequests extends Controller
                 $result = $this->GetEntierListForSearchValue( $request, $user );
                 break;
 
+
+            case 'layout/save-key-point-list':
+                $result = $this->SaveKeyPointList( $request, $user );
+                break;
+    
 
 
 
