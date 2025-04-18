@@ -38,7 +38,6 @@ trait SaveKeyPointListTrait{
                 $result[ 'message' ] = $validateAccessRight[ 'message' ];
             }else{
                 $result[ 'ok' ] = true;
-
                 $result[ 'data' ] =  $request['data']['list'];
 
 
