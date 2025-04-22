@@ -6,6 +6,10 @@ use App\Http\Controllers\Traits\UserData\GetUserDataTrait;
 use App\Http\Controllers\Traits\ValidateAccessRight\ValidateAccessRightCompanyAffiliationTrait;
 use App\Http\Controllers\Traits\ValidateData\ValidateCompanyAliasTrait;
 
+use App\Http\Controllers\Post\Layout\Traits\GetKeyPointListTrait;
+
+
+
 use Validator;
 use Illuminate\Validation\Rule;
 
@@ -16,6 +20,7 @@ trait GetStartingDataLayoutTrait{
     use GetUserDataTrait;
     use ValidateAccessRightCompanyAffiliationTrait;
     use ValidateCompanyAliasTrait;
+    use GetKeyPointListTrait;
 
     public function GetStartingDataLayout( $request, $user ){
 
@@ -39,10 +44,8 @@ trait GetStartingDataLayoutTrait{
             }else{
                 $result[ 'ok' ] = true;
                 $result[ 'userData' ] = $this->GetUserData( $request, $user );
+                $result[ 'keyPountList' ] = $this->GetKeyPointList( $companyAlias );
 
-
-                $result[ 'myData' ] = ['успех'];
-                
                 
             };
 

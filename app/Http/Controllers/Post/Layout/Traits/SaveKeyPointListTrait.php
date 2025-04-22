@@ -11,6 +11,10 @@ use Illuminate\Validation\Rule;
 
 use Storage;
 
+use App\Models\KeyPoints;
+use App\Models\Company;
+
+
 trait SaveKeyPointListTrait{
 
     use GetUserDataTrait;
@@ -39,11 +43,28 @@ trait SaveKeyPointListTrait{
             }else{
                 $result[ 'ok' ] = true;
                 $result[ 'data' ] =  $request['data']['list'];
+                $list = $request['data']['list'];
 
+                $company = Company::where( 'alias', '=', $companyAlias )->first();
+                $company_id = $company->id;
 
+                $keyPoints = KeyPoints::where('company_id', '=', $company_id)->get();
+                $keyPoints->map->delete();
 
+                for( $i = 0; $i < count( $list ); $i++ ){
+                    $dayNum =       $list[ $i ][ 'dayNum' ];
+                    $description =  $list[ $i ][ 'description' ];
+                    $ms =           $list[ $i ][ 'ms' ];
+                    $time =         $list[ $i ][ 'time' ];
 
-                
+                    $KeyPoints = new KeyPoints;
+                    $KeyPoints->company_id = $company_id;
+                    $KeyPoints->dayNum = $dayNum;
+                    $KeyPoints->time = $time;
+                    $KeyPoints->description = $description;
+                    $KeyPoints->ms = $ms;
+                    $KeyPoints->save();
+                };
                 
             };
 
