@@ -7,6 +7,7 @@ use App\Http\Controllers\Traits\ValidateAccessRight\ValidateAccessRightCompanyAf
 use App\Http\Controllers\Traits\ValidateData\ValidateCompanyAliasTrait;
 
 use App\Http\Controllers\Post\Layout\Traits\GetKeyPointListTrait;
+use App\Http\Controllers\Post\Layout\Traits\GetCategoryListTrait;
 
 
 
@@ -21,6 +22,7 @@ trait GetStartingDataLayoutTrait{
     use ValidateAccessRightCompanyAffiliationTrait;
     use ValidateCompanyAliasTrait;
     use GetKeyPointListTrait;
+    use GetCategoryListTrait;
 
     public function GetStartingDataLayout( $request, $user ){
 
@@ -45,6 +47,11 @@ trait GetStartingDataLayoutTrait{
                 $result[ 'ok' ] = true;
                 $result[ 'userData' ] = $this->GetUserData( $request, $user );
                 $result[ 'keyPountList' ] = $this->GetKeyPointList( $companyAlias );
+                $result[ 'categoryList' ] = $this->GetCategoryList( $companyAlias );
+
+
+
+                
 
                 
             };
