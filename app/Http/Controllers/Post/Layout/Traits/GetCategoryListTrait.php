@@ -2,18 +2,30 @@
 
 namespace App\Http\Controllers\Post\Layout\Traits;
 
-// use App\Models\KeyPoints;
-// use App\Models\Company;
+use App\Models\Category;
+use App\Models\Company;
 
 trait GetCategoryListTrait{
 
     public function GetCategoryList( $companyAlias ){
 
-        $result = [];
+        $company = Company::where( 'alias', '=', $companyAlias )->first();
+        $company_id = $company->id;
 
-        
+        $category = Category::where( 'company_id', '=', $company_id )->get();
 
-        return $result;
+        $list = [];
+        foreach( $category as $model ){
+            array_push( $list, [
+                'id' =>         $model->id,
+                'name' =>       $model->name,
+                'prefix' =>     $model->prefix,
+                'colorText' =>  $model->colorText,
+                'colorBG' =>    $model->colorBG,
+            ] );
+        };
+
+        return $list;
         
     }
 

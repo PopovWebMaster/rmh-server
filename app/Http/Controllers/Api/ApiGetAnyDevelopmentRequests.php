@@ -23,6 +23,13 @@ use App\Http\Controllers\Post\PlayReport\Traits\GetOneDayPlayReportListTrait;
 use App\Http\Controllers\Post\PlayReport\Traits\GetEntierListForSearchValueTrait;
 use App\Http\Controllers\Post\Layout\Traits\SaveKeyPointListTrait;
 use App\Http\Controllers\Post\Layout\Traits\SaveCategoryListTrait;
+use App\Http\Controllers\Post\Layout\Traits\AddNewCategoryTrait;
+use App\Http\Controllers\Post\Layout\Traits\RemoveCategoryTrait;
+
+
+
+
+
 
 
 class ApiGetAnyDevelopmentRequests extends Controller
@@ -41,6 +48,8 @@ class ApiGetAnyDevelopmentRequests extends Controller
     use GetEntierListForSearchValueTrait;
     use SaveKeyPointListTrait;
     use SaveCategoryListTrait;
+    use AddNewCategoryTrait;
+    use RemoveCategoryTrait;
 
     public function store( Request $request )
     {
@@ -111,9 +120,16 @@ class ApiGetAnyDevelopmentRequests extends Controller
             case 'layout/save-category-list':
                 $result = $this->SaveCategoryList( $request, $user );
                 break;
+
+            case 'layout/add-new-category':
+                $result = $this->AddNewCategory( $request, $user );
+                break;
+
+            case 'layout/remove-category':
+                $result = $this->RemoveCategory( $request, $user );
+                break;
     
 
-    
 
 
 

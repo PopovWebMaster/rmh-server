@@ -6,13 +6,17 @@ use App\Http\Controllers\Traits\UserData\GetUserDataTrait;
 use App\Http\Controllers\Traits\ValidateAccessRight\ValidateAccessRightCompanyAffiliationTrait;
 use App\Http\Controllers\Traits\ValidateData\ValidateCompanyAliasTrait;
 
-use Validator;
-use Illuminate\Validation\Rule;
+use App\Http\Controllers\Traits\ValidateData\ValidateOneCategoryTrait;
+use App\Http\Controllers\Post\Layout\Traits\GetCategoryListTrait;
 
-use Storage;
+// use Validator;
+// use Illuminate\Validation\Rule;
 
-use App\Models\KeyPoints;
+// use Storage;
+
+// use App\Models\KeyPoints;
 use App\Models\Company;
+use App\Models\Category;
 
 
 trait SaveCategoryListTrait{
@@ -20,6 +24,8 @@ trait SaveCategoryListTrait{
     use GetUserDataTrait;
     use ValidateAccessRightCompanyAffiliationTrait;
     use ValidateCompanyAliasTrait;
+    use ValidateOneCategoryTrait;
+    use GetCategoryListTrait;
 
     public function SaveCategoryList( $request, $user ){
 
@@ -42,29 +48,51 @@ trait SaveCategoryListTrait{
                 $result[ 'message' ] = $validateAccessRight[ 'message' ];
             }else{
                 $result[ 'ok' ] = true;
-                $result[ 'data' ] =  $request['data'];
-                // $list = $request['data']['list'];
 
-                // $company = Company::where( 'alias', '=', $companyAlias )->first();
-                // $company_id = $company->id;
+                $list =  $request['data']['list'];
 
-                // $keyPoints = KeyPoints::where('company_id', '=', $company_id)->get();
-                // $keyPoints->map->delete();
+                $company = Company::where( 'alias', '=', $companyAlias )->first();
+                $company_id = $company->id;
 
-                // for( $i = 0; $i < count( $list ); $i++ ){
-                //     $dayNum =       $list[ $i ][ 'dayNum' ];
-                //     $description =  $list[ $i ][ 'description' ];
-                //     $ms =           $list[ $i ][ 'ms' ];
-                //     $time =         $list[ $i ][ 'time' ];
+                for( $i = 0; $i < count( $list ); $i++ ){
 
-                //     $KeyPoints = new KeyPoints;
-                //     $KeyPoints->company_id = $company_id;
-                //     $KeyPoints->dayNum = $dayNum;
-                //     $KeyPoints->time = $time;
-                //     $KeyPoints->description = $description;
-                //     $KeyPoints->ms = $ms;
-                //     $KeyPoints->save();
-                // };
+                    $categoryId =        $list[ $i ][ 'id' ];
+                    $categoryName =      $list[ $i ][ 'name' ];
+                    $categoryPrefix =    $list[ $i ][ 'prefix' ];
+                    $categoryColorText = $list[ $i ][ 'colorText' ];
+                    $categoryColorBG =   $list[ $i ][ 'colorBG' ];
+
+                    $validate = $this->ValidateOneCategory([
+                        'categoryName' =>       $categoryName,
+                        'categoryPrefix' =>     $categoryPrefix,
+                        'categoryColorText' =>  $categoryColorText,
+                        'categoryColorBG' =>    $categoryColorBG,
+                    ]);
+
+                    $result[ 'message' ] = [];
+
+                    if( $validate[ 'fails' ] ){
+                        array_push( $result[ 'message' ], $validate[ 'message' ]);
+                    }else{
+                        $category = Category::find( $categoryId );
+                        if( $category !== null  ){
+
+                            $category->name =       $categoryName;
+                            $category->prefix =     $categoryPrefix;
+                            $category->colorText =  $categoryColorText;
+                            $category->colorBG =    $categoryColorBG;
+                            $category->save();
+                        };
+                    };
+
+                };
+
+                $result[ 'list' ] = $this->GetCategoryList( $companyAlias );
+                // $result[ 'list' ] = $list;
+
+
+                
+
                 
             };
 
