@@ -48,7 +48,7 @@ trait AddNewCategoryTrait{
                 $result[ 'message' ] = $validateAccessRight[ 'message' ];
             }else{
                 // $result[ 'ok' ] = true;
-                $result['data'] = $request['data'];
+                // $result['data'] = $request['data'];
 
                 $validateOneCategory = $this->ValidateOneCategory([
                     'categoryName' =>       isset( $request['data']['categoryName'] )?      $request['data']['categoryName']: null,
