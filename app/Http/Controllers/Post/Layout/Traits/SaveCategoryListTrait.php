@@ -53,7 +53,8 @@ trait SaveCategoryListTrait{
 
                 $company = Company::where( 'alias', '=', $companyAlias )->first();
                 $company_id = $company->id;
-
+                $result[ 'message' ] = [];
+                
                 for( $i = 0; $i < count( $list ); $i++ ){
 
                     $categoryId =        $list[ $i ][ 'id' ];
@@ -69,7 +70,7 @@ trait SaveCategoryListTrait{
                         'categoryColorBG' =>    $categoryColorBG,
                     ]);
 
-                    $result[ 'message' ] = [];
+                    // $result[ 'message' ] = [];
 
                     if( $validate[ 'fails' ] ){
                         array_push( $result[ 'message' ], $validate[ 'message' ]);

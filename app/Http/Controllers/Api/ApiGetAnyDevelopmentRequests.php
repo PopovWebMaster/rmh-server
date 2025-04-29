@@ -26,6 +26,8 @@ use App\Http\Controllers\Post\Layout\Traits\SaveCategoryListTrait;
 use App\Http\Controllers\Post\Layout\Traits\AddNewCategoryTrait;
 use App\Http\Controllers\Post\Layout\Traits\RemoveCategoryTrait;
 use App\Http\Controllers\Post\Layout\Traits\AddNewEventTrait;
+use App\Http\Controllers\Post\Layout\Traits\RemoveEventTrait;
+use App\Http\Controllers\Post\Layout\Traits\SaveEventListTrait;
 
 
 
@@ -51,6 +53,8 @@ class ApiGetAnyDevelopmentRequests extends Controller
     use AddNewCategoryTrait;
     use RemoveCategoryTrait;
     use AddNewEventTrait;
+    use RemoveEventTrait;
+    use SaveEventListTrait;
 
     public function store( Request $request )
     {
@@ -133,6 +137,14 @@ class ApiGetAnyDevelopmentRequests extends Controller
 
             case 'layout/add-new-event':
                 $result = $this->AddNewEvent( $request, $user );
+                break;
+
+            case 'layout/remove-event':
+                $result = $this->RemoveEvent( $request, $user );
+                break;
+
+            case 'layout/save-event-list':
+                $result = $this->SaveEventList( $request, $user );
                 break;
 
 
