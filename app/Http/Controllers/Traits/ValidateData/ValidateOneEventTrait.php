@@ -14,23 +14,24 @@ trait ValidateOneEventTrait{
             'message' => '',
         ];
 
-        $eventName =    $params[ 'eventName' ];
-        $eventNotes =   $params[ 'eventNotes' ];
-        $eventType =    $params[ 'eventType' ];
-        $categoryId =   $params[ 'categoryId' ];
+        $eventName =            $params[ 'eventName' ];
+        $eventNotes =           $params[ 'eventNotes' ];
+        $eventType =            $params[ 'eventType' ];
+        $categoryId =           $params[ 'categoryId' ];
+        $eventDurationTime =    $params[ 'eventDurationTime' ];
 
         $validate = Validator::make( [ 
-            'eventName' =>      $eventName,
-            'eventNotes' =>     $eventNotes,
-            'eventType' =>      $eventType,
-            'categoryId' =>     $categoryId,
-
+            'eventName' =>              $eventName,
+            'eventNotes' =>             $eventNotes,
+            'eventType' =>              $eventType,
+            'categoryId' =>             $categoryId,
+            'eventDurationTime' =>      $eventDurationTime,
         ], [
-            'eventName' =>      [ 'required', 'string', 'max:255' ],
-            'eventNotes' =>     [ 'nullable', 'string', 'max:255' ],
-            'eventType' =>      [ 'required', 'string', Rule::in(['file', 'block']), ],
-            'categoryId' =>     [ 'nullable', 'exists:category,id' ],
-
+            'eventName' =>          [ 'required', 'string', 'max:255' ],
+            'eventNotes' =>         [ 'nullable', 'string', 'max:255' ],
+            'eventType' =>          [ 'required', 'string', Rule::in(['file', 'block']), ],
+            'categoryId' =>         [ 'nullable', 'exists:category,id' ],
+            'eventDurationTime' =>  [ 'required', 'string', 'max:10' ],
         ]);
 
         if( $validate->fails() ){

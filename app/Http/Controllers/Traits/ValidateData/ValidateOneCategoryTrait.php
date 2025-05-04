@@ -27,7 +27,7 @@ trait ValidateOneCategoryTrait{
 
         ], [
             'categoryName' =>       [ 'required', 'string', 'max:255' ],
-            'categoryPrefix' =>     [ 'required', 'string', 'max:255' ],
+            'categoryPrefix' =>     [ 'nullable', 'string', 'max:255' ],
             'categoryColorText' =>  [ 'required', 'string', 'min:4', 'max:20' ],
             'categoryColorBG' =>    [ 'required', 'string', 'min:4', 'max:20' ],
 

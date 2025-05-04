@@ -48,6 +48,7 @@ trait AddNewEventTrait{
                     'eventNotes' => isset( $request['data']['eventNotes'] )?    $request['data']['eventNotes']: null,
                     'eventType' =>  isset( $request['data']['eventType'] )?     $request['data']['eventType']: null,
                     'categoryId' => isset( $request['data']['categoryId'] )?    $request['data']['categoryId']: null,
+                    'eventDurationTime' => isset( $request['data']['eventDurationTime'] )?    $request['data']['eventDurationTime']: null,
                 ]);
 
                 if( $validateOneEvent[ 'fails' ] ){
@@ -64,6 +65,7 @@ trait AddNewEventTrait{
                     $events->name =         $request['data']['eventName'];
                     $events->notes =        $request['data']['eventNotes'];
                     $events->type =         $request['data']['eventType'];
+                    $events->durationTime = $request['data']['eventDurationTime'];
                     $events->save();
 
                     $result[ 'list' ] = $this->GetEventsList( $companyAlias );

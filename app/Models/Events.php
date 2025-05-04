@@ -12,7 +12,8 @@ class Events extends Model
         'category_id',
         'name',
         'notes',
-        'type'
+        'type',
+        'durationTime',
     ];
 
     public $timestamps = true;

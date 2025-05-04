@@ -50,17 +50,21 @@ trait SaveEventListTrait{
 
                 for( $i = 0; $i < count( $list ); $i++ ){
 
-                    $eventId =      $list[ $i ][ 'id' ];
-                    $categoryId =   $list[ $i ][ 'category_id' ];
-                    $eventName =    $list[ $i ][ 'name' ];
-                    $eventNotes =   $list[ $i ][ 'notes' ];
-                    $eventType =    $list[ $i ][ 'type' ];
+                    $eventId =              $list[ $i ][ 'id' ];
+                    $categoryId =           $list[ $i ][ 'category_id' ];
+                    $eventName =            $list[ $i ][ 'name' ];
+                    $eventNotes =           $list[ $i ][ 'notes' ];
+                    $eventType =            $list[ $i ][ 'type' ];
+                    $eventDurationTime =    $list[ $i ][ 'durationTime' ];
+
 
                     $validate = $this->ValidateOneEvent([
-                        'eventName' =>      $eventName,
-                        'eventNotes' =>     $eventNotes,
-                        'eventType' =>      $eventType,
-                        'categoryId' =>     $categoryId,
+                        'eventName' =>          $eventName,
+                        'eventNotes' =>         $eventNotes,
+                        'eventType' =>          $eventType,
+                        'categoryId' =>         $categoryId,
+                        'eventDurationTime' =>  $eventDurationTime,
+
                     ]);
 
                     if( $validate[ 'fails' ] ){
@@ -74,6 +78,8 @@ trait SaveEventListTrait{
                         if( $events !== null ){
                             $events->category_id = $categoryId;
                             $events->notes = $eventNotes;
+                            $events->name = $eventName;
+                            $events->durationTime = $eventDurationTime;
                             $events->save();
                         };
 

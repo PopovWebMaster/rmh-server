@@ -19,7 +19,7 @@ trait GetCategoryListTrait{
             array_push( $list, [
                 'id' =>         $model->id,
                 'name' =>       $model->name,
-                'prefix' =>     $model->prefix,
+                'prefix' =>     $model->prefix === null? '': $model->prefix,
                 'colorText' =>  $model->colorText,
                 'colorBG' =>    $model->colorBG,
             ] );

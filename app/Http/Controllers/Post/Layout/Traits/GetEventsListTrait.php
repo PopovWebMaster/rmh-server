@@ -22,6 +22,8 @@ trait GetEventsListTrait{
                 'category_id' =>    $model->category_id,
                 'notes' =>          $model->notes === null? '': $model->notes,
                 'type' =>           $model->type,
+                'durationTime' =>   $model->durationTime,
+
             ] );
         };
 
