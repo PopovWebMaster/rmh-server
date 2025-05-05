@@ -9,6 +9,7 @@ use App\Http\Controllers\Traits\ValidateData\ValidateCompanyAliasTrait;
 use App\Http\Controllers\Post\Layout\Traits\GetKeyPointListTrait;
 use App\Http\Controllers\Post\Layout\Traits\GetCategoryListTrait;
 use App\Http\Controllers\Post\Layout\Traits\GetEventsListTrait;
+use App\Http\Controllers\Post\Layout\Traits\GetGridEventsListTrait;
 
 
 
@@ -25,6 +26,7 @@ trait GetStartingDataLayoutTrait{
     use GetKeyPointListTrait;
     use GetCategoryListTrait;
     use GetEventsListTrait;
+    use GetGridEventsListTrait;
 
     public function GetStartingDataLayout( $request, $user ){
 
@@ -51,6 +53,7 @@ trait GetStartingDataLayoutTrait{
                 $result[ 'keyPountList' ] = $this->GetKeyPointList( $companyAlias );
                 $result[ 'categoryList' ] = $this->GetCategoryList( $companyAlias );
                 $result[ 'eventsList' ] = $this->GetEventsList( $companyAlias );
+                $result[ 'gridEventsList' ] = $this->GetGridEventsList( $companyAlias );
 
 
 
