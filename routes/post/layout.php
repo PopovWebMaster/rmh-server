@@ -11,9 +11,12 @@ Route::prefix('/layout')->middleware( [ 'web' ] )->group(function ($router) {
     Route::post('/save-event-list',         [ 'uses' => 'Post\Layout\SaveEventListController@post' ]);
     Route::post('/save-grid-event-list',    [ 'uses' => 'Post\Layout\SaveGridEventsListController@post' ]);
 
+    Route::post('/remove-grid-event',    [ 'uses' => 'Post\Layout\RemoveGridEventController@post' ]);
 
 
 
+
+    
     
 
 

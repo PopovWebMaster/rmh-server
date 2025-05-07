@@ -29,6 +29,8 @@ use App\Http\Controllers\Post\Layout\Traits\AddNewEventTrait;
 use App\Http\Controllers\Post\Layout\Traits\RemoveEventTrait;
 use App\Http\Controllers\Post\Layout\Traits\SaveEventListTrait;
 use App\Http\Controllers\Post\Layout\Traits\SaveGridEventListTrait;
+use App\Http\Controllers\Post\Layout\Traits\RemoveGridEventTrait;
+
 
 
 
@@ -56,6 +58,7 @@ class ApiGetAnyDevelopmentRequests extends Controller
     use RemoveEventTrait;
     use SaveEventListTrait;
     use SaveGridEventListTrait;
+    use RemoveGridEventTrait;
 
     public function store( Request $request )
     {
@@ -150,6 +153,10 @@ class ApiGetAnyDevelopmentRequests extends Controller
 
             case 'layout/save-grid-event-list':
                 $result = $this->SaveGridEventList( $request, $user );
+                break;
+
+            case 'layout/remove-grid-event':
+                $result = $this->RemoveGridEvent( $request, $user );
                 break;
 
 
