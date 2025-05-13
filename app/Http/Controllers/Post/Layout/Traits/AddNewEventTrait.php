@@ -41,7 +41,7 @@ trait AddNewEventTrait{
                 $result[ 'message' ] = $validateAccessRight[ 'message' ];
             }else{
                 // $result[ 'ok' ] = true;
-                $result['data'] = $request['data'];
+                // $result['data'] = $request['data'];
 
                 $validateOneEvent = $this->ValidateOneEvent([
                     'eventName' =>  isset( $request['data']['eventName'] )?     $request['data']['eventName']: null,
