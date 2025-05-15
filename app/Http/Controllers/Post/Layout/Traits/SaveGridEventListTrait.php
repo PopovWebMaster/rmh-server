@@ -5,19 +5,19 @@ namespace App\Http\Controllers\Post\Layout\Traits;
 use App\Http\Controllers\Traits\ValidateAccessRight\ValidateAccessRightCompanyAffiliationTrait;
 use App\Http\Controllers\Traits\ValidateData\ValidateCompanyAliasTrait;
 
-// use App\Http\Controllers\Traits\ValidateData\ValidateOneEventTrait;
 use App\Http\Controllers\Post\Layout\Traits\GetGridEventsListTrait;
+use App\Http\Controllers\Traits\ValidateData\ValidateGridEventListTrait;
 
 use App\Models\Company;
-use App\Models\Events;
+use App\Models\GridEvents;
 
 
 trait SaveGridEventListTrait{
 
     use ValidateAccessRightCompanyAffiliationTrait;
     use ValidateCompanyAliasTrait;
-    // use ValidateOneEventTrait;
     use GetGridEventsListTrait;
+    use ValidateGridEventListTrait;
 
     public function SaveGridEventList( $request, $user ){
 
@@ -39,59 +39,60 @@ trait SaveGridEventListTrait{
             if( $validateAccessRight[ 'fails' ] ){
                 $result[ 'message' ] = $validateAccessRight[ 'message' ];
             }else{
-                $result[ 'ok' ] = true;
+                $company = Company::where( 'alias', '=', $companyAlias )->first();
+                $company_id = $company->id;
 
                 $list =  $request['data']['list'];
 
-                // $company = Company::where( 'alias', '=', $companyAlias )->first();
-                // $company_id = $company->id;
+                $validateList = $this->ValidateGridEventList([
+                    'list' => $list,
+                    'company_id' => $company_id,
+                ]);
 
-                // $result[ 'message' ] = [];
-
-                // for( $i = 0; $i < count( $list ); $i++ ){
-
-                //     $eventId =              $list[ $i ][ 'id' ];
-                //     $categoryId =           $list[ $i ][ 'category_id' ];
-                //     $eventName =            $list[ $i ][ 'name' ];
-                //     $eventNotes =           $list[ $i ][ 'notes' ];
-                //     $eventType =            $list[ $i ][ 'type' ];
-                //     $eventDurationTime =    $list[ $i ][ 'durationTime' ];
+                if( $validateList[ 'fails' ] ){
+                    $result[ 'message' ] = $validateList[ 'message' ];
+                }else{
+                    $list =  $request['data']['list'];
+                    $result[ 'ok' ] = true;
 
 
-                //     $validate = $this->ValidateOneEvent([
-                //         'eventName' =>          $eventName,
-                //         'eventNotes' =>         $eventNotes,
-                //         'eventType' =>          $eventType,
-                //         'categoryId' =>         $categoryId,
-                //         'eventDurationTime' =>  $eventDurationTime,
-
-                //     ]);
-
-                //     if( $validate[ 'fails' ] ){
-                //         array_push( $result[ 'message' ], $validate[ 'message' ]);
-                //     }else{
-
-                //         $events = Events::where( 'id', '=', $eventId )
-                //                         ->where( 'company_id', '=', $company_id )
-                //                         ->first();
-
-                //         if( $events !== null ){
-                //             $events->category_id = $categoryId;
-                //             $events->notes = $eventNotes;
-                //             $events->name = $eventName;
-                //             $events->durationTime = $eventDurationTime;
-                //             $events->save();
-                //         };
-
-                //     };
-
-                // };
+                    for( $day_num = 0; $day_num < count( $list ); $day_num++ ){
+                        for( $i = 0; $i < count( $list[ $day_num ]); $i++ ){
+                            $dayNum =         $list[ $day_num ][ $i ][ 'dayNum' ];
+                            $cutPart =        $list[ $day_num ][ $i ][ 'cutPart' ];
+                            $durationTime =   $list[ $day_num ][ $i ][ 'durationTime' ];
+                            $eventId =        $list[ $day_num ][ $i ][ 'eventId' ];
+                            $firstSegmentId = $list[ $day_num ][ $i ][ 'firstSegmentId' ];
+                            $id =             $list[ $day_num ][ $i ][ 'id' ];
+                            $isKeyPoint =     $list[ $day_num ][ $i ][ 'isKeyPoint' ];
+                            $notes =          $list[ $day_num ][ $i ][ 'notes' ];
+                            $pushIt =         $list[ $day_num ][ $i ][ 'pushIt' ];
+                            $startTime =      $list[ $day_num ][ $i ][ 'startTime' ];
 
 
+                            $gridEvent = GridEvents::where( 'company_id', '=', $company_id )
+                                                    ->where( 'id', '=', $id )
+                                                    ->first();
 
-                // $result[ 'list' ] = $this->GetGridEventsList( $companyAlias );
-                $result[ 'list' ] = $list;
+                            if( $gridEvent !== null ){
+                                $gridEvent->day_num = $dayNum;
+                                $gridEvent->is_a_key_point = $isKeyPoint;
+                                $gridEvent->start_time = $startTime;
+                                $gridEvent->duration_time = $durationTime;
+                                $gridEvent->event_id = $eventId;
+                                $gridEvent->first_segment_id = $firstSegmentId;
+                                $gridEvent->notes = $notes;
+                                $gridEvent->cut_part = $cutPart;
+                                $gridEvent->push_it = $pushIt;
+                                $gridEvent->save();
+                            };
+    
+                        };
 
+                        
+                    };
+                    $result[ 'list' ] = $this->GetGridEventsList( $companyAlias );
+                };
             };
 
         };
