@@ -9,9 +9,10 @@ use App\Http\Controllers\Traits\ValidateData\ValidateCompanyAliasTrait;
 // use App\Http\Controllers\Traits\ValidateData\ValidateEventIdTrait;
 // use App\Http\Controllers\Post\Layout\Traits\GetCategoryListTrait;
 use App\Http\Controllers\Post\Layout\Traits\GetGridEventsListTrait;
+use App\Http\Controllers\Traits\ValidateData\ValidateGridEventIdTrait;
 
 use App\Models\Company;
-// use App\Models\Events;
+use App\Models\GridEvents;
 
 
 trait RemoveGridEventTrait{
@@ -21,6 +22,7 @@ trait RemoveGridEventTrait{
     use ValidateCompanyAliasTrait;
     // use ValidateEventIdTrait;
     use GetGridEventsListTrait;
+    use ValidateGridEventIdTrait;
 
     public function RemoveGridEvent( $request, $user ){
 
@@ -42,36 +44,34 @@ trait RemoveGridEventTrait{
             if( $validateAccessRight[ 'fails' ] ){
                 $result[ 'message' ] = $validateAccessRight[ 'message' ];
             }else{
-                $result[ 'ok' ] = true; // временно тут !!!!!!
-                $result['data'] = $request['data'];
-                $result['message'] = 'функционал удаления не прописан';
 
-                $result[ 'list' ] = $this->GetGridEventsList( $companyAlias );
+                $gridEventId = isset( $request['data']['gridEventId'] )? $request['data']['gridEventId']: null;
 
+                $validate = $this->ValidateGridEventId( [ 'gridEventId' => $gridEventId ] );
+                if( $validate[ 'fails' ] ){
+                    $result[ 'message' ] = $validate[ 'message' ];
+                }else{
+                    $result[ 'ok' ] = true;
+                    // $result['data'] = $request['data'];
 
-                // $company = Company::where( 'alias', '=', $companyAlias )->first();
-                // $company_id = $company->id;
+                    $company = Company::where( 'alias', '=', $companyAlias )->first();
+                    $company_id = $company->id;
 
-                // $eventId = isset( $request['data']['eventId'] )? $request['data']['eventId']: null;
+                    $models = GridEvents::where( 'company_id', '=', $company_id )->where( 'first_segment_id', '=', $gridEventId )->get();
 
-                // $validateEventId = $this->ValidateEventId([
-                //     'eventId' =>    $eventId,
-                //     'companyId' =>  $company_id,
-                // ]);
+                    if( count( $models ) > 0 ){
+                        $models->map->delete();
+                    };
 
-                // if( $validateEventId[ 'fails' ] ){
-                //     $result[ 'message' ] = $validateCategoryId[ 'message' ];
-                // }else{
-                //     $result[ 'ok' ] = true;
+                    $gridEvents = GridEvents::find( $gridEventId );
+                    if( $gridEvents !== null ){
+                        $gridEvents->delete();
+                    };
 
-                //     $event = Events::find( $eventId );
-                //     $event->delete();
+                    $result[ 'list' ] = $this->GetGridEventsList( $companyAlias );
 
-                //     $result[ 'list' ] = $this->GetEventsList( $companyAlias );
+                };
 
-                // };
-
-                
             };
 
         };
