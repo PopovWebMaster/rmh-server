@@ -7,7 +7,7 @@ use Illuminate\Validation\Rule;
 
 trait ValidateOneGridEventTrait{
 
-    public function ValidateOneGridEvent( $oneGridEvent ){
+    public function ValidateOneGridEvent( $oneGridEvent, $id_isRequired = true ){
 
         $result = [
             'fails' => true,
@@ -24,6 +24,17 @@ trait ValidateOneGridEventTrait{
         $notes =            isset( $oneGridEvent[ 'notes' ] )?          $oneGridEvent[ 'notes' ]: null;
         $pushIt =           isset( $oneGridEvent[ 'pushIt' ] )?         $oneGridEvent[ 'pushIt' ]: null;
         $startTime =        isset( $oneGridEvent[ 'startTime' ] )?      $oneGridEvent[ 'startTime' ]: null;
+
+        $id_rule = [];
+        if( $id_isRequired ){
+            $id_rule = [ 'required', 'numeric', 'exists:grid_events,id' ];
+        }else{
+            if( $id === null ){
+                $id_rule = [ 'nullable' ];
+            }else{
+                $id_rule = [ 'required', 'numeric', 'exists:grid_events,id' ];
+            };
+        };
 
         $validate = Validator::make( [ 
             'dayNum' =>         $dayNum,
@@ -42,9 +53,10 @@ trait ValidateOneGridEventTrait{
             'durationTime' =>   [ 'required', 'numeric', 'min:0', 'max:86400' ],
             'eventId' =>        [ 'required', 'exists:events,id' ],
             'firstSegmentId' => [ 'nullable', 'exists:grid_events,id' ],
-            'id' =>             [ 'required', 'exists:grid_events,id' ],
+            // 'id' =>             [ 'required', 'exists:grid_events,id' ],
+            'id' =>             $id_rule,
             'isKeyPoint' =>     [ 'required', 'boolean' ],
-            'notes' =>          [ 'nullable', 'string', 'max:10' ],
+            'notes' =>          [ 'nullable', 'string', 'max:255' ],
             'pushIt' =>         [ 'nullable', 'string', 'max:10' ],
             'startTime' =>      [ 'required', 'numeric', 'min:0', 'max:86400' ],
 

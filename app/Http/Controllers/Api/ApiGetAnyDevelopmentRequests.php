@@ -31,7 +31,7 @@ use App\Http\Controllers\Post\Layout\Traits\SaveEventListTrait;
 use App\Http\Controllers\Post\Layout\Traits\SaveGridEventListTrait;
 use App\Http\Controllers\Post\Layout\Traits\RemoveGridEventTrait;
 use App\Http\Controllers\Post\Layout\Traits\AddNewGridEventTrait;
-
+use App\Http\Controllers\Post\Layout\Traits\SetGridEventsDayListAfterCuttingTrait;
 
 
 
@@ -62,6 +62,7 @@ class ApiGetAnyDevelopmentRequests extends Controller
     use SaveGridEventListTrait;
     use RemoveGridEventTrait;
     use AddNewGridEventTrait;
+    use SetGridEventsDayListAfterCuttingTrait;
 
     public function store( Request $request )
     {
@@ -165,6 +166,11 @@ class ApiGetAnyDevelopmentRequests extends Controller
             case 'layout/add-new-grid-event':
                 $result = $this->AddNewGridEvent( $request, $user );
                 break;
+
+            case 'layout/set-grid-events-day-list-after-cutting':
+                $result = $this->SetGridEventsDayListAfterCutting( $request, $user );
+                break;
+
 
 
 
