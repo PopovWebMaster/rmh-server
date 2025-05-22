@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Post\Layout\Traits;
 
 use App\Models\GridEvents;
 use App\Models\Company;
+use App\Models\Events;
+
+
+
 
 trait GetGridEventsListTrait{
 
@@ -24,34 +28,43 @@ trait GetGridEventsListTrait{
 
         foreach( $gridEvents as $model ){
 
-            $item = [
-                'id' =>             $model->id,
-                'dayNum' =>         $model->day_num,
-                'firstSegmentId' => $model->first_segment_id,
-                'startTime' =>      $model->start_time,
-                'durationTime' =>   $model->duration_time,
-                'notes' =>          $model->notes === null? '': $model->notes,
-                'eventId' =>        $model->event_id,
-                'pushIt' =>         $model->push_it,
-                'cutPart' =>        $model->cut_part,
-                'isKeyPoint' =>     ( bool ) $model->is_a_key_point,
-            ];
+            $event = Events::find( $model->event_id );
+            if( $event === null ){
+                $model->delete();
+            }else{
+                $item = [
+                    'id' =>             $model->id,
+                    'dayNum' =>         $model->day_num,
+                    'firstSegmentId' => $model->first_segment_id,
+                    'startTime' =>      $model->start_time,
+                    'durationTime' =>   $model->duration_time,
+                    'notes' =>          $model->notes === null? '': $model->notes,
+                    'eventId' =>        $model->event_id,
+                    'pushIt' =>         $model->push_it,
+                    'cutPart' =>        $model->cut_part,
+                    'isKeyPoint' =>     ( bool ) $model->is_a_key_point,
+                ];
 
-            if( $item[ 'dayNum' ] === 0 ){
-                array_push( $day_0, $item );
-            }else if( $item[ 'dayNum' ] === 1 ){
-                array_push( $day_1, $item );
-            }else if( $item[ 'dayNum' ] === 2 ){
-                array_push( $day_2, $item );
-            }else if( $item[ 'dayNum' ] === 3 ){
-                array_push( $day_3, $item );
-            }else if( $item[ 'dayNum' ] === 4 ){
-                array_push( $day_4, $item );
-            }else if( $item[ 'dayNum' ] === 5 ){
-                array_push( $day_5, $item );
-            }else if( $item[ 'dayNum' ] === 6 ){
-                array_push( $day_6, $item );
-            };
+                if( $item[ 'dayNum' ] === 0 ){
+                    array_push( $day_0, $item );
+                }else if( $item[ 'dayNum' ] === 1 ){
+                    array_push( $day_1, $item );
+                }else if( $item[ 'dayNum' ] === 2 ){
+                    array_push( $day_2, $item );
+                }else if( $item[ 'dayNum' ] === 3 ){
+                    array_push( $day_3, $item );
+                }else if( $item[ 'dayNum' ] === 4 ){
+                    array_push( $day_4, $item );
+                }else if( $item[ 'dayNum' ] === 5 ){
+                    array_push( $day_5, $item );
+                }else if( $item[ 'dayNum' ] === 6 ){
+                    array_push( $day_6, $item );
+                };
+            }
+
+
+
+            
 
         };
 

@@ -16,9 +16,10 @@ Route::prefix('/')->middleware( [ 'web' ] )->group(function ($router) {
         Route::get('/schedule',     [ 'uses' => 'Get\ScheduleController@get' ])->name('schedule');
         Route::get('/play-report',  [ 'uses' => 'Get\PlayReportController@get' ])->name('play_report');
         Route::get('/logs',         [ 'uses' => 'Get\LogsController@get' ])->name('logs');
-        Route::get('/applications', [ 'uses' => 'Get\AplicationsController@get' ])->name('applications');
+        Route::get('/applications', [ 'uses' => 'Get\ApplicationsController@get' ])->name('applications');
         Route::get('/layout',       [ 'uses' => 'Get\LayoutController@get' ])->name('layout');
-        
+
+
 
     });
 

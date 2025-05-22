@@ -66,6 +66,7 @@ trait RemoveGridEventTrait{
                     $gridEvents = GridEvents::find( $gridEventId );
                     if( $gridEvents !== null ){
                         $gridEvents->delete();
+
                     };
 
                     $result[ 'list' ] = $this->GetGridEventsList( $companyAlias );

@@ -14,6 +14,7 @@ use App\Http\Controllers\Post\GetStartingData\Traits\GetStartingDataScheduleTrai
 use App\Http\Controllers\Post\GetStartingData\Traits\GetStartingDataPlayReportTrait;
 use App\Http\Controllers\Post\GetStartingData\Traits\GetStartingDataLogsTrait;
 use App\Http\Controllers\Post\GetStartingData\Traits\GetStartingDataLayoutTrait;
+use App\Http\Controllers\Post\GetStartingData\Traits\GetStartingDataApplicationsTrait;
 
 use App\Http\Controllers\Post\Login\Traits\LoginUserByPostTrait;
 use App\Http\Controllers\Post\GetStartingData\Traits\GetStartingDataAccessIsClosedTrait;
@@ -47,6 +48,7 @@ class ApiGetAnyDevelopmentRequests extends Controller
     use GetStartingDataPlayReportTrait;
     use GetStartingDataLogsTrait;
     use GetStartingDataLayoutTrait;
+    use GetStartingDataApplicationsTrait;
     use LoginUserByPostTrait;
     use GetStartingDataAccessIsClosedTrait;
     use AddPlayReportTrait;
@@ -107,7 +109,11 @@ class ApiGetAnyDevelopmentRequests extends Controller
             case 'get-starting-data/layout':
                 $result = $this->GetStartingDataLayout( $request, $user );
                 break;
-    
+
+            case 'get-starting-data/applications':
+                $result = $this->GetStartingDataApplications( $request, $user );
+                break;
+
             case 'login-by-post':
                 $result = $this->LoginUserByPost( $request );
                 break;
