@@ -11,7 +11,7 @@ use App\Http\Controllers\Post\Layout\Traits\GetCategoryListTrait;
 use App\Http\Controllers\Post\Layout\Traits\GetEventsListTrait;
 use App\Http\Controllers\Post\Layout\Traits\GetGridEventsListTrait;
 
-
+use App\Http\Controllers\Post\Application\Traits\GetApplicationListTrait;
 
 use Validator;
 use Illuminate\Validation\Rule;
@@ -27,6 +27,7 @@ trait GetStartingDataApplicationsTrait{
     use GetCategoryListTrait;
     use GetEventsListTrait;
     use GetGridEventsListTrait;
+    use GetApplicationListTrait;
 
     public function GetStartingDataApplications( $request, $user ){
 
@@ -54,6 +55,8 @@ trait GetStartingDataApplicationsTrait{
                 $result[ 'categoryList' ] = $this->GetCategoryList( $companyAlias );
                 $result[ 'eventsList' ] = $this->GetEventsList( $companyAlias );
                 $result[ 'gridEventsList' ] = $this->GetGridEventsList( $companyAlias );
+                $result[ 'applicationList' ] = $this->GetApplicationList( $companyAlias );
+
 
 
 
