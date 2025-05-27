@@ -1,0 +1,37 @@
+<?php 
+
+namespace App\Http\Controllers\Traits\ValidateData;
+
+use Validator;
+use Illuminate\Validation\Rule;
+
+trait ValidateApplicationIdTrait{
+
+    public function ValidateApplicationId( $applicationId ){
+
+        $result = [
+            'fails' => true,
+            'message' => '',
+        ];
+
+        $validate = Validator::make( [ 
+            'applicationId' => $applicationId,
+        ], [
+            'applicationId' => [ 'required', 'exists:applications,id' ],
+        ]);
+
+        if( $validate->fails() ){
+            $result[ 'message' ] = $validate->getMessageBag()->all();
+        }else{
+            $result[ 'fails' ] = false;
+
+        };
+
+        return $result;
+        
+    }
+
+}
+
+
+?>

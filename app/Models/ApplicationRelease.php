@@ -9,7 +9,6 @@ class ApplicationRelease extends Model
     protected $table = 'application_release';
     protected $fillable = [
         'applications_id', 
-        // 'category_id',
         'time_from_sec', 
         'time_to_sec', 
         'duration_sec', 

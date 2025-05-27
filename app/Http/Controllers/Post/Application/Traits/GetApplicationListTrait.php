@@ -15,7 +15,9 @@ trait GetApplicationListTrait{
         $company = Company::where( 'alias', '=', $companyAlias )->first();
         $company_id = $company->id;
 
-        $applications = Applications::where( 'company_id', '=', $company_id )->get();
+        $applications = Applications::where( 'company_id', '=', $company_id )
+                                    ->orderBy( 'updated_at', 'desc' )
+                                    ->get();
 
         $list = [];
         foreach( $applications as $model ){
