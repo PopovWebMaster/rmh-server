@@ -36,7 +36,8 @@ use App\Http\Controllers\Post\Layout\Traits\SetGridEventsDayListAfterCuttingTrai
 
 use App\Http\Controllers\Post\Application\Traits\AddNewApplicationTrait;
 use App\Http\Controllers\Post\Application\Traits\GetApplicationDataTrait;
-
+use App\Http\Controllers\Post\Application\Traits\SaveApplicationDataTrait;
+use App\Http\Controllers\Post\Application\Traits\RemoveApplicationTrait;
 
 
 class ApiGetAnyDevelopmentRequests extends Controller
@@ -67,6 +68,8 @@ class ApiGetAnyDevelopmentRequests extends Controller
     use SetGridEventsDayListAfterCuttingTrait;
     use AddNewApplicationTrait;
     use GetApplicationDataTrait;
+    use SaveApplicationDataTrait;
+    use RemoveApplicationTrait;
 
     public function store( Request $request )
     {
@@ -186,6 +189,16 @@ class ApiGetAnyDevelopmentRequests extends Controller
             case 'applications/get-application-data':
                 $result = $this->GetApplicationData( $request, $user );
                 break;
+
+            case 'applications/seve-application-data':
+                $result = $this->SaveApplicationData( $request, $user );
+                break;
+
+            case 'applications/remove-application':
+                $result = $this->RemoveApplication( $request, $user );
+                break;
+
+
 
 
 
