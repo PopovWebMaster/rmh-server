@@ -9,6 +9,7 @@ class ApplicationReleaseSchedule extends Model
     protected $table = 'application_release_schedule';
     protected $fillable = [
         'application_release_id', 
+        'grid_event_id',
         'day_sec', 
         'time_sec', 
 

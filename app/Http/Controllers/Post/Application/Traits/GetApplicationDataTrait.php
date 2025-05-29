@@ -119,6 +119,10 @@ trait GetApplicationDataTrait{
             $notes =                    isset( $model->notes )? $model->notes: '';
             $file_names_version_list =  isset( $model->file_names_version_list )? json_decode( $model->file_names_version_list, true ): [];
 
+            $description =              isset( $model->description )? $model->description: '';
+            $correct_file_name =        isset( $model->correct_file_name )? $model->correct_file_name: '';
+
+/*
             $schedule = [];
 
             $applicationSeriesSchedule = ApplicationSeriesSchedule::where( 'application_series_id', '=', $application_series_id )->get();
@@ -136,7 +140,7 @@ trait GetApplicationDataTrait{
                 ] );
 
             };
-
+*/
             /* 
                 здесь должна быть сортировка $schedule
             */
@@ -148,7 +152,10 @@ trait GetApplicationDataTrait{
                 'serial_num' =>                 $serial_num,
                 'notes' =>                      $notes,
                 'file_names_version_list' =>    $file_names_version_list,
-                'schedule' =>                   $schedule,
+                'description' =>                $description,
+                'correct_file_name' =>          $correct_file_name,
+
+                // 'schedule' =>                   $schedule,
             ] );
 
         };
@@ -177,16 +184,22 @@ trait GetApplicationDataTrait{
             $name =                     $model->name;
             $notes =                    isset( $model->notes )? $model->notes: '';
             $file_names_version_list =  isset( $model->file_names_version_list )? json_decode( $model->file_names_version_list, true ): [];
+            $description =              isset( $model->description )? $model->description: '';
+            $correct_file_name =        isset( $model->correct_file_name )? $model->correct_file_name: '';
 
+
+            /*
             $schedule = [];
 
             $applicationReleaseSchedule = ApplicationReleaseSchedule::where( 'application_release_id', '=', $application_release_id )->get();
 
             foreach( $applicationReleaseSchedule as $model_2 ){
 
-                $id =       $model_2->id;
-                $day_sec =  $model_2->day_sec;
-                $time_sec = $model_2->time_sec;
+                $id =                       $model_2->id;
+                $application_release_id =   $model_2->application_release_id;
+                $grid_event_id =            $model_2->grid_event_id;
+                $day_sec =                  $model_2->day_sec;
+                $time_sec =                 $model_2->time_sec;
 
                 array_push( $schedule, [
                     'id' =>         $id,
@@ -195,6 +208,8 @@ trait GetApplicationDataTrait{
                 ] );
 
             };
+
+            */
 
             /* 
                 здесь должна быть сортировка $schedule
@@ -207,7 +222,9 @@ trait GetApplicationDataTrait{
                 'name' =>                       $name,
                 'notes' =>                      $notes,
                 'file_names_version_list' =>    $file_names_version_list,
-                'schedule' =>                   $schedule,
+                'description' =>                $description,
+                'correct_file_name' =>          $correct_file_name,
+                // 'schedule' =>                   $schedule,
             ] );
 
         };

@@ -16,6 +16,7 @@ class CreateApplicationSeriesScheduleTable extends Migration
         Schema::create('application_series_schedule', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('application_series_id');
+            $table->bigInteger('grid_event_id');
             $table->integer('day_sec');
             $table->integer('time_sec');
             $table->timestamps();

@@ -16,6 +16,8 @@ class ApplicationSeries extends Model
         'serial_num', 
         'notes',
         'file_names_version_list', 
+        'description',
+        'correct_file_name',
 
     ];
 

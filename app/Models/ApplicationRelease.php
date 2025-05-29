@@ -15,6 +15,10 @@ class ApplicationRelease extends Model
         'name', 
         'notes',
         'file_names_version_list', 
+        'description',
+        'correct_file_name',
+
+
 
     ];
 

@@ -16,14 +16,15 @@ class CreateApplicationReleaseTable extends Migration
         Schema::create('application_release', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('applications_id');
-            // $table->bigInteger('category_id')->nullable();
-
             $table->integer('time_from_sec')->nullable();
             $table->integer('time_to_sec')->nullable();
             $table->integer('duration_sec')->nullable();
             $table->string( 'name', 255 );
             $table->string( 'notes', 255 );
             $table->text('file_names_version_list')->nullable();
+
+            $table->text('description')->nullable();
+            $table->string( 'correct_file_name', 255 )->nullable();
 
 
 

@@ -9,6 +9,7 @@ class ApplicationSeriesSchedule extends Model
     protected $table = 'application_series_schedule';
     protected $fillable = [
         'application_series_id', 
+        'grid_event_id',
         'day_sec', 
         'time_sec', 
     ];
