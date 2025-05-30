@@ -17,7 +17,7 @@ class CreateApplicationReleaseScheduleTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('application_release_id');
             $table->bigInteger('grid_event_id');
-            $table->integer('day_sec');
+            $table->date('date');
             $table->integer('time_sec');
             $table->timestamps();
         });

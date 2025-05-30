@@ -10,7 +10,7 @@ class ApplicationReleaseSchedule extends Model
     protected $fillable = [
         'application_release_id', 
         'grid_event_id',
-        'day_sec', 
+        'date', 
         'time_sec', 
 
     ];

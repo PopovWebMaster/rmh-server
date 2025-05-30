@@ -14,6 +14,11 @@ use App\Models\ApplicationSeries;
 use App\Models\ApplicationRelease;
 use App\Models\ApplicationReleaseSchedule;
 use App\Models\ApplicationSeriesSchedule;
+use App\Models\Category;
+
+
+
+
 
 trait GetApplicationDataTrait{
 
@@ -61,13 +66,25 @@ trait GetApplicationDataTrait{
                     }else{
                         // $result[ 'ok' ] = true;
                         // $result['data'] = $request['data'];
+
+
+
                         $applications_id =  $application->id;
                         $name =             $application->name;
                         $category_id =      $application->category_id;
+
+
                         $num =              isset( $application->num )? $application->num: '';
                         $type =             $application->type;
                         $notes =            isset( $application->notes )? $application->notes: '';
                         $name =             $application->name;
+
+                        $categoryModel = Category::find( $category_id );
+                        if( $categoryModel === null ){
+                            $application->category_id = null;
+                            $application->save();
+                            $category_id = null;
+                        };
 
                         $applications = [];
 
@@ -112,8 +129,8 @@ trait GetApplicationDataTrait{
 
             $application_series_id =    $model->id;
 
-            $time_from_sec =            $model->time_from_sec;
-            $time_to_sec =              $model->time_to_sec;
+            $period_from =              $model->period_from;
+            $period_to =                $model->period_to;
             $duration_sec =             $model->duration_sec;
             $serial_num =               $model->serial_num;
             $notes =                    isset( $model->notes )? $model->notes: '';
@@ -122,47 +139,19 @@ trait GetApplicationDataTrait{
             $description =              isset( $model->description )? $model->description: '';
             $correct_file_name =        isset( $model->correct_file_name )? $model->correct_file_name: '';
 
-/*
-            $schedule = [];
-
-            $applicationSeriesSchedule = ApplicationSeriesSchedule::where( 'application_series_id', '=', $application_series_id )->get();
-
-            foreach( $applicationSeriesSchedule as $model_2 ){
-
-                $id =       $model_2->id;
-                $day_sec =  $model_2->day_sec;
-                $time_sec = $model_2->time_sec;
-
-                array_push( $schedule, [
-                    'id' =>         $id,
-                    'day_sec' =>    $day_sec,
-                    'time_sec' =>   $time_sec,
-                ] );
-
-            };
-*/
-            /* 
-                здесь должна быть сортировка $schedule
-            */
-
             array_push( $result, [
                 'application_series_id' =>      $application_series_id,
-                'time_from_sec' =>              $time_from_sec,
+                'period_from' =>                $period_from,
+                'period_to' =>                  $period_to,
                 'duration_sec' =>               $duration_sec,
                 'serial_num' =>                 $serial_num,
                 'notes' =>                      $notes,
                 'file_names_version_list' =>    $file_names_version_list,
                 'description' =>                $description,
                 'correct_file_name' =>          $correct_file_name,
-
-                // 'schedule' =>                   $schedule,
             ] );
 
         };
-
-        /* 
-            здесь должна быть сортировка $result
-        */
 
 
         return $result;
@@ -178,8 +167,8 @@ trait GetApplicationDataTrait{
 
             $application_release_id =    $model->id;
 
-            $time_from_sec =            $model->time_from_sec;
-            $time_to_sec =              $model->time_to_sec;
+            $period_from =              $model->period_from;
+            $period_to =                $model->period_to;
             $duration_sec =             $model->duration_sec;
             $name =                     $model->name;
             $notes =                    isset( $model->notes )? $model->notes: '';
@@ -187,51 +176,19 @@ trait GetApplicationDataTrait{
             $description =              isset( $model->description )? $model->description: '';
             $correct_file_name =        isset( $model->correct_file_name )? $model->correct_file_name: '';
 
-
-            /*
-            $schedule = [];
-
-            $applicationReleaseSchedule = ApplicationReleaseSchedule::where( 'application_release_id', '=', $application_release_id )->get();
-
-            foreach( $applicationReleaseSchedule as $model_2 ){
-
-                $id =                       $model_2->id;
-                $application_release_id =   $model_2->application_release_id;
-                $grid_event_id =            $model_2->grid_event_id;
-                $day_sec =                  $model_2->day_sec;
-                $time_sec =                 $model_2->time_sec;
-
-                array_push( $schedule, [
-                    'id' =>         $id,
-                    'day_sec' =>    $day_sec,
-                    'time_sec' =>   $time_sec,
-                ] );
-
-            };
-
-            */
-
-            /* 
-                здесь должна быть сортировка $schedule
-            */
-
             array_push( $result, [
                 'application_release_id' =>     $application_release_id,
-                'time_from_sec' =>              $time_from_sec,
+                'period_from' =>                $period_from,
+                'period_to' =>                  $period_to,
                 'duration_sec' =>               $duration_sec,
                 'name' =>                       $name,
                 'notes' =>                      $notes,
                 'file_names_version_list' =>    $file_names_version_list,
                 'description' =>                $description,
                 'correct_file_name' =>          $correct_file_name,
-                // 'schedule' =>                   $schedule,
             ] );
 
         };
-
-        /* 
-            здесь должна быть сортировка $result
-        */
 
         return $result;
     }

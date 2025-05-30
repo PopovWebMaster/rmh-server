@@ -10,8 +10,11 @@ class ApplicationSeries extends Model
     protected $fillable = [
         'applications_id', 
         // 'category_id',
-        'time_from_sec', 
-        'time_to_sec', 
+        // 'time_from_sec', 
+        // 'time_to_sec', 
+        'period_from', 
+        'period_to', 
+
         'duration_sec', 
         'serial_num', 
         'notes',

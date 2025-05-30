@@ -38,6 +38,9 @@ use App\Http\Controllers\Post\Application\Traits\AddNewApplicationTrait;
 use App\Http\Controllers\Post\Application\Traits\GetApplicationDataTrait;
 use App\Http\Controllers\Post\Application\Traits\SaveApplicationDataTrait;
 use App\Http\Controllers\Post\Application\Traits\RemoveApplicationTrait;
+use App\Http\Controllers\Post\Application\Traits\AddNewApplicationSeriesTrait;
+use App\Http\Controllers\Post\Application\Traits\AddNewApplicationReleaseTrait;
+
 
 
 class ApiGetAnyDevelopmentRequests extends Controller
@@ -70,6 +73,8 @@ class ApiGetAnyDevelopmentRequests extends Controller
     use GetApplicationDataTrait;
     use SaveApplicationDataTrait;
     use RemoveApplicationTrait;
+    use AddNewApplicationSeriesTrait;
+    use AddNewApplicationReleaseTrait;
 
     public function store( Request $request )
     {
@@ -198,10 +203,15 @@ class ApiGetAnyDevelopmentRequests extends Controller
                 $result = $this->RemoveApplication( $request, $user );
                 break;
 
+            case 'applications/add-new-application-series':
+                $result = $this->AddNewApplicationSeries( $request, $user );
+                break;
 
+            case 'applications/add-new-application-release':
+                $result = $this->AddNewApplicationRelease( $request, $user );
+                break;
 
-
-
+                
 
 
 
