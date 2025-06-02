@@ -16,7 +16,7 @@ class CreateApplicationSeriesTable extends Migration
         Schema::create('application_series', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('applications_id');
-            $table->integer('time_from_sec')->nullable();
+            // $table->integer('time_from_sec')->nullable();
 
             // $table->integer('time_to_sec')->nullable();
             // $table->integer('duration_sec')->nullable();

@@ -6,20 +6,20 @@ use App\Http\Controllers\Traits\ValidateData\ValidateCompanyAliasTrait;
 use App\Http\Controllers\Traits\ValidateAccessRight\ValidateAccessRightCompanyAffiliationTrait;
 // use App\Http\Controllers\Traits\ValidateData\ValidateNewApplicationTrait;
 
-// use App\Http\Controllers\Post\Application\Traits\GetApplicationListTrait;
+use App\Http\Controllers\Post\Application\Traits\GetApplicationListTrait;
 
 
-use App\Models\Applications;
+// use App\Models\Applications;
 use App\Models\Company;
 
-trait AddNewApplicationSeriesTrait{
+trait SaveApplicationDataTrait{
 
     use ValidateCompanyAliasTrait;
     use ValidateAccessRightCompanyAffiliationTrait;
     // use ValidateNewApplicationTrait;
-    // use GetApplicationListTrait;
+    use GetApplicationListTrait;
 
-    public function AddNewApplicationSeries( $request, $user ){
+    public function SaveApplicationData( $request, $user ){
         $result = [
             'ok' => false,
             'message' => '',

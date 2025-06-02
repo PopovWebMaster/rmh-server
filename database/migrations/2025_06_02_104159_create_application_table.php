@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateApplicationsTable extends Migration
+class CreateApplicationTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,15 @@ class CreateApplicationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('applications', function (Blueprint $table) {
+        Schema::create('application', function (Blueprint $table) {
             $table->bigIncrements('id');
+
             $table->bigInteger('company_id');
             $table->bigInteger('category_id')->nullable();
             $table->string( 'name', 255 );
             $table->integer('num')->nullable();
-            $table->string( 'type', 20 );
-            $table->string( 'notes', 255 )->nullable();
+            $table->string( 'manager_notes', 255 )->nullable();
+
 
             $table->timestamps();
         });
@@ -33,6 +34,6 @@ class CreateApplicationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('applications');
+        Schema::dropIfExists('application');
     }
 }

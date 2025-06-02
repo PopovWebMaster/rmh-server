@@ -14,7 +14,7 @@ use App\Http\Controllers\Post\GetStartingData\Traits\GetStartingDataScheduleTrai
 use App\Http\Controllers\Post\GetStartingData\Traits\GetStartingDataPlayReportTrait;
 use App\Http\Controllers\Post\GetStartingData\Traits\GetStartingDataLogsTrait;
 use App\Http\Controllers\Post\GetStartingData\Traits\GetStartingDataLayoutTrait;
-use App\Http\Controllers\Post\GetStartingData\Traits\GetStartingDataApplicationsTrait;
+use App\Http\Controllers\Post\GetStartingData\Traits\GetStartingDataApplicationTrait;
 
 use App\Http\Controllers\Post\Login\Traits\LoginUserByPostTrait;
 use App\Http\Controllers\Post\GetStartingData\Traits\GetStartingDataAccessIsClosedTrait;
@@ -34,12 +34,12 @@ use App\Http\Controllers\Post\Layout\Traits\RemoveGridEventTrait;
 use App\Http\Controllers\Post\Layout\Traits\AddNewGridEventTrait;
 use App\Http\Controllers\Post\Layout\Traits\SetGridEventsDayListAfterCuttingTrait;
 
-use App\Http\Controllers\Post\Application\Traits\AddNewApplicationTrait;
-use App\Http\Controllers\Post\Application\Traits\GetApplicationDataTrait;
-use App\Http\Controllers\Post\Application\Traits\SaveApplicationDataTrait;
-use App\Http\Controllers\Post\Application\Traits\RemoveApplicationTrait;
-use App\Http\Controllers\Post\Application\Traits\AddNewApplicationSeriesTrait;
-use App\Http\Controllers\Post\Application\Traits\AddNewApplicationReleaseTrait;
+// use App\Http\Controllers\Post\Application\Traits\AddNewApplicationTrait;
+// use App\Http\Controllers\Post\Application\Traits\GetApplicationDataTrait;
+// use App\Http\Controllers\Post\Application\Traits\SaveApplicationDataTrait;
+// use App\Http\Controllers\Post\Application\Traits\RemoveApplicationTrait;
+// use App\Http\Controllers\Post\Application\Traits\AddNewApplicationSeriesTrait;
+// use App\Http\Controllers\Post\Application\Traits\AddNewApplicationReleaseTrait;
 
 
 
@@ -52,7 +52,7 @@ class ApiGetAnyDevelopmentRequests extends Controller
     use GetStartingDataPlayReportTrait;
     use GetStartingDataLogsTrait;
     use GetStartingDataLayoutTrait;
-    use GetStartingDataApplicationsTrait;
+    use GetStartingDataApplicationTrait;
     use LoginUserByPostTrait;
     use GetStartingDataAccessIsClosedTrait;
     use AddPlayReportTrait;
@@ -69,12 +69,12 @@ class ApiGetAnyDevelopmentRequests extends Controller
     use RemoveGridEventTrait;
     use AddNewGridEventTrait;
     use SetGridEventsDayListAfterCuttingTrait;
-    use AddNewApplicationTrait;
-    use GetApplicationDataTrait;
-    use SaveApplicationDataTrait;
-    use RemoveApplicationTrait;
-    use AddNewApplicationSeriesTrait;
-    use AddNewApplicationReleaseTrait;
+    // use AddNewApplicationTrait;
+    // use GetApplicationDataTrait;
+    // use SaveApplicationDataTrait;
+    // use RemoveApplicationTrait;
+    // use AddNewApplicationSeriesTrait;
+    // use AddNewApplicationReleaseTrait;
 
     public function store( Request $request )
     {
@@ -121,7 +121,7 @@ class ApiGetAnyDevelopmentRequests extends Controller
                 break;
 
             case 'get-starting-data/applications':
-                $result = $this->GetStartingDataApplications( $request, $user );
+                $result = $this->GetStartingDataApplication( $request, $user );
                 break;
 
             case 'login-by-post':
@@ -187,29 +187,29 @@ class ApiGetAnyDevelopmentRequests extends Controller
                 $result = $this->SetGridEventsDayListAfterCutting( $request, $user );
                 break;
 
-            case 'applications/add-new-application':
-                $result = $this->AddNewApplication( $request, $user );
-                break;
+            // case 'applications/add-new-application':
+            //     $result = $this->AddNewApplication( $request, $user );
+            //     break;
 
-            case 'applications/get-application-data':
-                $result = $this->GetApplicationData( $request, $user );
-                break;
+            // case 'applications/get-application-data':
+            //     $result = $this->GetApplicationData( $request, $user );
+            //     break;
 
-            case 'applications/seve-application-data':
-                $result = $this->SaveApplicationData( $request, $user );
-                break;
+            // case 'applications/seve-application-data':
+            //     $result = $this->SaveApplicationData( $request, $user );
+            //     break;
 
-            case 'applications/remove-application':
-                $result = $this->RemoveApplication( $request, $user );
-                break;
+            // case 'applications/remove-application':
+            //     $result = $this->RemoveApplication( $request, $user );
+            //     break;
 
-            case 'applications/add-new-application-series':
-                $result = $this->AddNewApplicationSeries( $request, $user );
-                break;
+            // case 'applications/add-new-application-series':
+            //     $result = $this->AddNewApplicationSeries( $request, $user );
+            //     break;
 
-            case 'applications/add-new-application-release':
-                $result = $this->AddNewApplicationRelease( $request, $user );
-                break;
+            // case 'applications/add-new-application-release':
+            //     $result = $this->AddNewApplicationRelease( $request, $user );
+            //     break;
 
                 
 

@@ -9,17 +9,17 @@ use App\Http\Controllers\Traits\ValidateAccessRight\ValidateAccessRightCompanyAf
 // use App\Http\Controllers\Post\Application\Traits\GetApplicationListTrait;
 
 
-use App\Models\Applications;
+// use App\Models\Applications;
 use App\Models\Company;
 
-trait AddNewApplicationReleaseTrait{
+trait RemoveApplicationTrait{
 
     use ValidateCompanyAliasTrait;
     use ValidateAccessRightCompanyAffiliationTrait;
     // use ValidateNewApplicationTrait;
     // use GetApplicationListTrait;
 
-    public function AddNewApplicationRelease( $request, $user ){
+    public function RemoveApplication( $request, $user ){
         $result = [
             'ok' => false,
             'message' => '',
@@ -78,6 +78,7 @@ trait AddNewApplicationReleaseTrait{
 
 
 ?>
+
 
 
 

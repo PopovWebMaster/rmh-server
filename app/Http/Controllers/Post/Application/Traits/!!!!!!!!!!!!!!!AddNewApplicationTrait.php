@@ -4,22 +4,22 @@ namespace App\Http\Controllers\Post\Application\Traits;
 
 use App\Http\Controllers\Traits\ValidateData\ValidateCompanyAliasTrait;
 use App\Http\Controllers\Traits\ValidateAccessRight\ValidateAccessRightCompanyAffiliationTrait;
-// use App\Http\Controllers\Traits\ValidateData\ValidateNewApplicationTrait;
+use App\Http\Controllers\Traits\ValidateData\ValidateNewApplicationTrait;
 
 use App\Http\Controllers\Post\Application\Traits\GetApplicationListTrait;
 
 
-use App\Models\Applications;
+// use App\Models\Applications;
 use App\Models\Company;
 
-trait SaveApplicationDataTrait{
+trait AddNewApplicationTrait{
 
     use ValidateCompanyAliasTrait;
     use ValidateAccessRightCompanyAffiliationTrait;
-    // use ValidateNewApplicationTrait;
+    use ValidateNewApplicationTrait;
     use GetApplicationListTrait;
 
-    public function SaveApplicationData( $request, $user ){
+    public function AddNewApplication( $request, $user ){
         $result = [
             'ok' => false,
             'message' => '',

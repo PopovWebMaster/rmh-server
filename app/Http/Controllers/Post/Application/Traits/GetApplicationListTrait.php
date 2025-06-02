@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Post\Application\Traits;
 
-use App\Models\Applications;
+use App\Models\Application;
 use App\Models\Company;
 use App\Models\Category;
 
@@ -15,9 +15,9 @@ trait GetApplicationListTrait{
         $company = Company::where( 'alias', '=', $companyAlias )->first();
         $company_id = $company->id;
 
-        $applications = Applications::where( 'company_id', '=', $company_id )
-                                    ->orderBy( 'updated_at', 'desc' )
-                                    ->get();
+        $applications = Application::where( 'company_id', '=', $company_id )
+                                   ->orderBy( 'updated_at', 'desc' )
+                                   ->get();
 
         $list = [];
         foreach( $applications as $model ){
@@ -33,12 +33,11 @@ trait GetApplicationListTrait{
             };
 
             array_push( $list, [
-                'id' =>     $model->id,
-                'name' =>   $model->name,
-                'num' =>    $model->num === null? '': $model->num,
-                'notes' =>  $model->notes === null? '': $model->notes,
-                'type' =>   $model->type,
-                'category_id' => $category_id,
+                'id' =>             $model->id,
+                'name' =>           $model->name,
+                'num' =>            $model->num === null? '': $model->num,
+                'manager_notes' =>  $model->manager_notes === null? '': $model->manager_notes,
+                'category_id' =>    $category_id,
             ] );
 
         };

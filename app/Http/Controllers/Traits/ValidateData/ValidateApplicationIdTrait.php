@@ -17,7 +17,7 @@ trait ValidateApplicationIdTrait{
         $validate = Validator::make( [ 
             'applicationId' => $applicationId,
         ], [
-            'applicationId' => [ 'required', 'exists:applications,id' ],
+            'applicationId' => [ 'required', 'exists:application,id' ],
         ]);
 
         if( $validate->fails() ){
