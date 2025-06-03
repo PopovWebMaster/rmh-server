@@ -15,14 +15,21 @@ trait ValidateNewApplicationTrait{
         ];
 
         $applicationName =  $params[ 'applicationName' ];
-        $applicationType =  $params[ 'applicationType' ];
+        $applicationNum =  $params[ 'applicationNum' ];
+        $applicationCategoryId =  $params[ 'applicationCategoryId' ];
+        $applicationManagerNotes =  $params[ 'applicationManagerNotes' ];
 
         $validate = Validator::make( [ 
-            'applicationName' =>    $applicationName,
-            'applicationType' =>    $applicationType,
+            'applicationName' =>            $applicationName,
+            'applicationNum' =>             $applicationNum,
+            'applicationCategoryId' =>      $applicationCategoryId,
+            'applicationManagerNotes' =>    $applicationManagerNotes,
+
         ], [
-            'applicationName' => [ 'required', 'string', 'min:1', 'max:255' ],
-            'applicationType' => [ 'required', 'string', Rule::in([ 'series', 'release' ]), ],
+            'applicationName' =>            [ 'required', 'string', 'min:1', 'max:255' ],
+            'applicationNum' =>             [ 'nullable', 'numeric', 'min:0', 'max:1000000' ],
+            'applicationCategoryId' =>      [ 'nullable', 'exists:category,id' ],
+            'applicationManagerNotes' =>    [ 'nullable', 'string', ],
         ]);
 
         if( $validate->fails() ){

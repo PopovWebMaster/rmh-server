@@ -18,6 +18,7 @@ class CreateApplicationTable extends Migration
 
             $table->bigInteger('company_id');
             $table->bigInteger('category_id')->nullable();
+            $table->bigInteger('manager_id')->nullable();
             $table->string( 'name', 255 );
             $table->integer('num')->nullable();
             $table->string( 'manager_notes', 255 )->nullable();

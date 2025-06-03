@@ -10,6 +10,7 @@ class Application extends Model
     protected $fillable = [
         'company_id', 
         'category_id', 
+        'manager_id',
         'name', 
         'num', 
         'manager_notes', 
