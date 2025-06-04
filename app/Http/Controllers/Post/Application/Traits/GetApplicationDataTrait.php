@@ -68,8 +68,8 @@ trait GetApplicationDataTrait{
                         $category_id =      $application->category_id;
                         $manager_id =       $application->manager_id;
                         $name =             $application->name;
-                        $num =              $application->num;
-                        $manager_notes =    $application->manager_notes;
+                        $num =              $application->num === null? '': $application->num;
+                        $manager_notes =    $application->manager_notes === null? '': $application->manager_notes;
 
                         $categoryModel = Category::find( $category_id );
                         if( $categoryModel === null ){

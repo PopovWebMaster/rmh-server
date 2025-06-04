@@ -45,6 +45,10 @@ use App\Http\Controllers\Post\Layout\Traits\SetGridEventsDayListAfterCuttingTrai
 use App\Http\Controllers\Post\Application\Traits\AddNewApplicationTrait;
 use App\Http\Controllers\Post\Application\Traits\GetApplicationDataTrait;
 
+use App\Http\Controllers\Post\Application\Traits\AddSubApplicationReleaseTrait;
+use App\Http\Controllers\Post\Application\Traits\AddSubApplicationSeriesTrait;
+
+
 
 class ApiGetAnyDevelopmentRequests extends Controller
 {
@@ -81,6 +85,9 @@ class ApiGetAnyDevelopmentRequests extends Controller
 
     use AddNewApplicationTrait;
     use GetApplicationDataTrait;
+
+    use AddSubApplicationReleaseTrait;
+    use AddSubApplicationSeriesTrait;
 
 
     public function store( Request $request )
@@ -201,6 +208,19 @@ class ApiGetAnyDevelopmentRequests extends Controller
             case 'applications/get-application-data':
                 $result = $this->GetApplicationData( $request, $user );
                 break;
+
+
+            case 'applications/add-new-subapplication-release':
+                $result = $this->AddSubApplicationRelease( $request, $user );
+                break;
+
+            case 'applications/add-new-subapplication-series':
+                $result = $this->AddSubApplicationSeries( $request, $user );
+                break;
+
+
+
+
 
             // case 'applications/seve-application-data':
             //     $result = $this->SaveApplicationData( $request, $user );
