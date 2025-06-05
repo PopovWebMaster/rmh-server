@@ -4,19 +4,22 @@ namespace App\Http\Controllers\Post\Application\Traits;
 
 use App\Http\Controllers\Traits\ValidateData\ValidateCompanyAliasTrait;
 use App\Http\Controllers\Traits\ValidateAccessRight\ValidateAccessRightCompanyAffiliationTrait;
-// use App\Http\Controllers\Traits\ValidateData\ValidateNewApplicationTrait;
+use App\Http\Controllers\Traits\ValidateData\ValidateSubApplicationReleaseTrait;
 
-use App\Http\Controllers\Post\Application\Traits\GetApplicationListTrait;
+// use App\Http\Controllers\Post\Application\Traits\GetApplicationListTrait;
+use App\Http\Controllers\Post\Application\Traits\GetOneApplicationDataTrait;
 
 use App\Models\Application;
 use App\Models\Company;
+use App\Models\SubApplication;
 
 trait AddSubApplicationReleaseTrait{
 
     use ValidateCompanyAliasTrait;
     use ValidateAccessRightCompanyAffiliationTrait;
-    // use ValidateNewApplicationTrait;
-    use GetApplicationListTrait;
+    use ValidateSubApplicationReleaseTrait;
+    // use GetApplicationListTrait;
+    use GetOneApplicationDataTrait;
 
     public function AddSubApplicationRelease( $request, $user ){
         $result = [
@@ -37,45 +40,56 @@ trait AddSubApplicationReleaseTrait{
                 $result[ 'message' ] = $validateAccessRight[ 'message' ];
             }else{
 
-                $result[ 'ok' ] = true;
-                $result['data'] = $request['data'];
+                // $result[ 'ok' ] = true;
+                // $result['data'] = $request['data'];
 
-                // $applicationName =          isset( $request['data']['applicationName'] )?           $request['data']['applicationName']: null;
-                // $applicationNum =           isset( $request['data']['applicationNum'] )?            $request['data']['applicationNum']: null;
-                // $applicationCategoryId =    isset( $request['data']['applicationCategoryId'] )?     $request['data']['applicationCategoryId']: null;
-                // $applicationManagerNotes =  isset( $request['data']['applicationManagerNotes'] )?   $request['data']['applicationManagerNotes']: null;
+                $applicationId =    isset( $request['data']['applicationId'] )? $request['data']['applicationId']: null;
+                $name =             isset( $request['data']['name'] )?          $request['data']['name']: null;
+                $periodFrom =       isset( $request['data']['periodFrom'] )?    $request['data']['periodFrom']: null;
+                $periodTo =         isset( $request['data']['periodTo'] )?      $request['data']['periodTo']: null;
+                $durationSec =      isset( $request['data']['durationSec'] )?   $request['data']['durationSec']: null;
+                $airNotes =         isset( $request['data']['airNotes'] )?      $request['data']['airNotes']: null;
 
-                // $validate = $this->ValidateNewApplication([
-                //     'applicationName' =>            $applicationName,
-                //     'applicationNum' =>             $applicationNum,
-                //     'applicationCategoryId' =>      $applicationCategoryId,
-                //     'applicationManagerNotes' =>    $applicationManagerNotes,
+                $validate = $this->ValidateSubApplicationRelease([
+                    'applicationId' =>  $applicationId,
+                    'name' =>           $name,
+                    'periodFrom' =>     $periodFrom,
+                    'periodTo' =>       $periodTo,
+                    'durationSec' =>    $durationSec,
+                    'airNotes' =>       $airNotes,
+                ]);
 
-                // ]);
+                if( $validate[ 'fails' ] ){
+                    $result[ 'message' ] = $validate[ 'message' ];
+                }else{
 
-                // if( $validate[ 'fails' ] ){
-                //     $result[ 'message' ] = $validate[ 'message' ];
-                // }else{
+                    $company = Company::where( 'alias', '=', $companyAlias )->first();
+                    $company_id = $company->id;
 
-                //     $result[ 'ok' ] = true;
+                    $application = Application::where( 'company_id', '=', $company_id )->where( 'id', '=', $applicationId )->first();
 
-                //     $company = Company::where( 'alias', '=', $companyAlias )->first();
-                //     $company_id = $company->id;
+                    if( $application === null ){
+                        $result[ 'message' ] = 'иди нахуй';
+                    }else{
+                        $result[ 'ok' ] = true;
+                        $result['data'] = $request['data'];
 
-                //     $application = new Application;
+                        $subApplication = new SubApplication;
+                        $subApplication->application_id =   $applicationId;
+                        $subApplication->period_from =      $periodFrom;
+                        $subApplication->period_to =        $periodTo;
+                        $subApplication->duration_sec =     $durationSec;
+                        $subApplication->name =             $name;
+                        $subApplication->air_notes =        $airNotes;
+                        $subApplication->type =             'release';
 
-                //     $application->company_id =      $company_id;
-                //     $application->manager_id =      $user->id;
-                //     $application->name =            $applicationName;
-                //     $application->num =             $applicationNum;
-                //     $application->manager_notes =   $applicationManagerNotes;
-                //     $application->category_id =     $applicationCategoryId;
+                        $subApplication->save();
 
-                //     $application->save();
+                        $result[ 'application' ] = $this->GetOneApplicationData( $applicationId );
 
-                //     $result[ 'list' ] = $this->GetApplicationList( $companyAlias );
+                    };
 
-                // };
+                };
             };
         };
 

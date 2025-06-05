@@ -5,10 +5,13 @@ namespace App\Http\Controllers\Post\Application\Traits;
 use App\Models\Application;
 use App\Models\Company;
 use App\Models\Category;
+use App\Models\SubApplication;
 
-
+use App\Http\Controllers\Post\Application\Traits\GetSubApplicationListTrait;
 
 trait GetApplicationListTrait{
+
+    use GetSubApplicationListTrait;
 
     public function GetApplicationList( $companyAlias ){
 
@@ -22,6 +25,8 @@ trait GetApplicationListTrait{
         $list = [];
         foreach( $applications as $model ){
 
+            $application_id = $model->id;
+
             $category_id = $model->category_id;
             if( $category_id !== null ){
                 $category = Category::find( $category_id );
@@ -33,11 +38,12 @@ trait GetApplicationListTrait{
             };
 
             array_push( $list, [
-                'id' =>             $model->id,
-                'name' =>           $model->name,
-                'num' =>            $model->num === null? '': $model->num,
-                'manager_notes' =>  $model->manager_notes === null? '': $model->manager_notes,
-                'category_id' =>    $category_id,
+                'id' =>                     $application_id,
+                'name' =>                   $model->name,
+                'num' =>                    $model->num === null? '': $model->num,
+                'manager_notes' =>          $model->manager_notes === null? '': $model->manager_notes,
+                'category_id' =>            $category_id,
+                'sub_application_list' =>   $this->GetSubApplicationList( $application_id ),
             ] );
 
         };

@@ -13,7 +13,7 @@ use App\Models\Company;
 
 use App\Models\SubApplication;
 
-
+use App\Http\Controllers\Post\Application\Traits\GetOneApplicationDataTrait;
 
 trait AddSubApplicationSeriesTrait{
 
@@ -21,6 +21,8 @@ trait AddSubApplicationSeriesTrait{
     use ValidateAccessRightCompanyAffiliationTrait;
     use ValidateSubApplicationSeriesTrait;
     use GetApplicationListTrait;
+
+    use GetOneApplicationDataTrait;
 
     public function AddSubApplicationSeries( $request, $user ){
         $result = [
@@ -95,7 +97,8 @@ trait AddSubApplicationSeriesTrait{
                             $subApplication->save();
                         };
 
-                        $result[ 'list' ] = $this->GetApplicationList( $companyAlias );
+                        // $result[ 'list' ] = $this->GetApplicationList( $companyAlias );
+                        $result[ 'application' ] = $this->GetOneApplicationData( $applicationId );
 
                     };
 

@@ -7,6 +7,7 @@ use App\Http\Controllers\Traits\ValidateAccessRight\ValidateAccessRightCompanyAf
 use App\Http\Controllers\Traits\ValidateData\ValidateNewApplicationTrait;
 
 use App\Http\Controllers\Traits\ValidateData\ValidateApplicationIdTrait;
+// use App\Http\Controllers\Post\Application\Traits\GetSubApplicationListTrait;
 
 use App\Models\Company;
 use App\Models\Application;
@@ -14,9 +15,9 @@ use App\Models\Application;
 // use App\Models\ApplicationRelease;
 // use App\Models\ApplicationReleaseSchedule;
 // use App\Models\ApplicationSeriesSchedule;
-use App\Models\Category;
+// use App\Models\Category;
 
-
+use App\Http\Controllers\Post\Application\Traits\GetOneApplicationDataTrait;
 
 
 
@@ -26,6 +27,8 @@ trait GetApplicationDataTrait{
     use ValidateAccessRightCompanyAffiliationTrait;
     use ValidateNewApplicationTrait;
     use ValidateApplicationIdTrait;
+    // use GetSubApplicationListTrait;
+    use GetOneApplicationDataTrait;
 
     public function GetApplicationData( $request, $user ){
         $result = [
@@ -64,26 +67,30 @@ trait GetApplicationDataTrait{
                         
                         $result[ 'ok' ] = true;
 
-                        $application_id =   $application->id;
-                        $category_id =      $application->category_id;
-                        $manager_id =       $application->manager_id;
-                        $name =             $application->name;
-                        $num =              $application->num === null? '': $application->num;
-                        $manager_notes =    $application->manager_notes === null? '': $application->manager_notes;
+                        $result[ 'application' ] = $this->GetOneApplicationData( $applicationId );
 
-                        $categoryModel = Category::find( $category_id );
-                        if( $categoryModel === null ){
-                            $application->category_id = null;
-                            $application->save();
-                            $category_id = null;
-                        };
+                        // $application_id =   $application->id;
+                        // $category_id =      $application->category_id;
+                        // $manager_id =       $application->manager_id;
+                        // $name =             $application->name;
+                        // $num =              $application->num === null? '': $application->num;
+                        // $manager_notes =    $application->manager_notes === null? '': $application->manager_notes;
 
-                        $result[ 'application_id' ] =   $application_id;
-                        $result[ 'category_id' ] =      $category_id;
-                        $result[ 'manager_id' ] =       $manager_id;
-                        $result[ 'name' ] =             $name;
-                        $result[ 'num' ] =              $num;
-                        $result[ 'manager_notes' ] =    $manager_notes;
+                        // $categoryModel = Category::find( $category_id );
+                        // if( $categoryModel === null ){
+                        //     $application->category_id = null;
+                        //     $application->save();
+                        //     $category_id = null;
+                        // };
+
+                        // $result[ 'application_id' ] =       $application_id;
+                        // $result[ 'category_id' ] =          $category_id;
+                        // $result[ 'manager_id' ] =           $manager_id;
+                        // $result[ 'name' ] =                 $name;
+                        // $result[ 'num' ] =                  $num;
+                        // $result[ 'manager_notes' ] =        $manager_notes;
+                        // $result[ 'sub_application_list' ] = $this->GetSubApplicationList( $application_id );
+
 
 
 
