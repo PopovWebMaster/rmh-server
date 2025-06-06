@@ -8,18 +8,14 @@ Route::prefix('/applications')->middleware( [ 'web' ] )->group(function ($router
     Route::post('/add-new-subapplication-release',  [ 'uses' => 'Post\Application\AddNewSubApplicationReleaseController@post' ]);
     Route::post('/add-new-subapplication-series',   [ 'uses' => 'Post\Application\AddNewSubApplicationSeriesController@post' ]);
 
+    Route::post('/seve-application-data',   [ 'uses' => 'Post\Application\SaveSubApplicationChangesController@post' ]);
 
 
 
 
-
-    // Route::post('/seve-application-data',           [ 'uses' => 'Post\Application\SaveApplicationDataController@post' ]);
-    // Route::post('/remove-application',              [ 'uses' => 'Post\Application\RemoveApplicationController@post' ]);
-    // Route::post('/add-new-application-series',      [ 'uses' => 'Post\Application\AddNewApplicationSeriesController@post' ]);
-    // Route::post('/add-new-application-release',     [ 'uses' => 'Post\Application\AddNewApplicationReleaseController@post' ]);
+// seve-application-data
 
 
-    
 
 
 });

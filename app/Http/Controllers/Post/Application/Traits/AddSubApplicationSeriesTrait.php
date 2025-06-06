@@ -7,6 +7,7 @@ use App\Http\Controllers\Traits\ValidateAccessRight\ValidateAccessRightCompanyAf
 use App\Http\Controllers\Traits\ValidateData\ValidateSubApplicationSeriesTrait;
 
 use App\Http\Controllers\Post\Application\Traits\GetApplicationListTrait;
+use App\Http\Controllers\Traits\ValidateData\ValidateApplicationDataTrait;
 
 use App\Models\Application;
 use App\Models\Company;
@@ -23,6 +24,7 @@ trait AddSubApplicationSeriesTrait{
     use GetApplicationListTrait;
 
     use GetOneApplicationDataTrait;
+    use ValidateApplicationDataTrait;
 
     public function AddSubApplicationSeries( $request, $user ){
         $result = [
@@ -47,6 +49,12 @@ trait AddSubApplicationSeriesTrait{
                 // $result['data'] = $request['data'];
 
                 $applicationId =    isset( $request['data']['applicationId'] )? $request['data']['applicationId']: null;
+
+                $applicationName =          isset( $request['data']['applicationName'] )?           $request['data']['applicationName']: null;
+                $applicationCategoryId =    isset( $request['data']['applicationCategoryId'] )?     $request['data']['applicationCategoryId']: null;
+                $applicationNum =           isset( $request['data']['applicationNum'] )?            $request['data']['applicationNum']: null;
+                $applicationManagerNotes =  isset( $request['data']['applicationManagerNotes'] )?   $request['data']['applicationManagerNotes']: null;
+
                 $serialNumFrom =    isset( $request['data']['serialNumFrom'] )? $request['data']['serialNumFrom']: null;
                 $serialNumTo =      isset( $request['data']['serialNumTo'] )?   $request['data']['serialNumTo']: null;
                 $periodFrom =       isset( $request['data']['periodFrom'] )?    $request['data']['periodFrom']: null;
@@ -68,8 +76,6 @@ trait AddSubApplicationSeriesTrait{
                     $result[ 'message' ] = $validate[ 'message' ];
                 }else{
 
-                    
-
                     $company = Company::where( 'alias', '=', $companyAlias )->first();
                     $company_id = $company->id;
 
@@ -80,7 +86,25 @@ trait AddSubApplicationSeriesTrait{
                     }else{
                         $result[ 'ok' ] = true;
 
-                        $result['data'] = $request['data'];
+                        $validateApp = $this->ValidateApplicationData([
+                            'applicationId' =>              $applicationId,
+                            'applicationName' =>            $applicationName,
+                            'applicationCategoryId' =>      $applicationCategoryId,
+                            'applicationNum' =>             $applicationNum,
+                            'applicationManagerNotes' =>    $applicationManagerNotes,
+                        ]);
+
+                        if( $validateApp[ 'fails' ] ){
+
+                        }else{
+                            $application->category_id =     $applicationCategoryId;
+                            $application->name =            $applicationName;
+                            $application->num =             $applicationNum;
+                            $application->manager_notes =   $applicationManagerNotes;
+                            $application->save();
+                        };
+
+                        // $result['data'] = $request['data'];
 
                         for( $i = $serialNumFrom; $i < $serialNumTo + 1; $i++ ){
                             $subApplication = new SubApplication;
@@ -99,6 +123,7 @@ trait AddSubApplicationSeriesTrait{
 
                         // $result[ 'list' ] = $this->GetApplicationList( $companyAlias );
                         $result[ 'application' ] = $this->GetOneApplicationData( $applicationId );
+                        $result[ 'applicationList' ] = $this->GetApplicationList( $companyAlias );
 
                     };
 

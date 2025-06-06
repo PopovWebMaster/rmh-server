@@ -47,6 +47,7 @@ use App\Http\Controllers\Post\Application\Traits\GetApplicationDataTrait;
 
 use App\Http\Controllers\Post\Application\Traits\AddSubApplicationReleaseTrait;
 use App\Http\Controllers\Post\Application\Traits\AddSubApplicationSeriesTrait;
+use App\Http\Controllers\Post\Application\Traits\SaveApplicationChangesTrait;
 
 
 
@@ -88,6 +89,7 @@ class ApiGetAnyDevelopmentRequests extends Controller
 
     use AddSubApplicationReleaseTrait;
     use AddSubApplicationSeriesTrait;
+    use SaveApplicationChangesTrait;
 
 
     public function store( Request $request )
@@ -218,25 +220,12 @@ class ApiGetAnyDevelopmentRequests extends Controller
                 $result = $this->AddSubApplicationSeries( $request, $user );
                 break;
 
+            case 'applications/seve-application-data':
+                $result = $this->SaveApplicationChanges( $request, $user );
+                break;
 
 
-
-
-            // case 'applications/seve-application-data':
-            //     $result = $this->SaveApplicationData( $request, $user );
-            //     break;
-
-            // case 'applications/remove-application':
-            //     $result = $this->RemoveApplication( $request, $user );
-            //     break;
-
-            // case 'applications/add-new-application-series':
-            //     $result = $this->AddNewApplicationSeries( $request, $user );
-            //     break;
-
-            // case 'applications/add-new-application-release':
-            //     $result = $this->AddNewApplicationRelease( $request, $user );
-            //     break;
+// seve-application-data
 
                 
 

@@ -5,12 +5,12 @@ namespace App\Http\Controllers\Post\Application;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use App\Http\Controllers\Post\Application\Traits\GetApplicationListTrait;
 use Auth;
+use App\Http\Controllers\Post\Application\Traits\SaveApplicationChangesTrait;
 
-class GetApplicationListController extends Controller
+class SaveSubApplicationChangesController extends Controller
 {
-    use GetApplicationListTrait;
+    use SaveApplicationChangesTrait;
 
     public function post( Request $request ){
 
@@ -20,7 +20,7 @@ class GetApplicationListController extends Controller
             $user = Auth::user();
         };
 
-        $result = $this->GetApplicationList( 'не трогать этот метод, по запаре его создал!!!!!!!!!!!!' );
+        $result = $this->SaveApplicationChanges( $request, $user );
 
         return response()->json( $result, 200, ['Content-Type' => 'application/json; charset=UTF-8'] );
     }
