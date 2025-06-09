@@ -59,6 +59,8 @@ class LogsController extends SiteController
                     return view( 'logs', $this->data );
                 };
 
+                // dd( $this->data );
+
 
             }else{
                 return redirect()->route( 'login' );

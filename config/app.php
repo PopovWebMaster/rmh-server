@@ -126,6 +126,12 @@ return [
 
     'admin_email' => env('ADMIN_EMAIL'),
 
+
+    'company_type_tv' => 'tv',
+    'company_program_system_forward' => 'Forward-TA',
+
+
+
     
 
     /*

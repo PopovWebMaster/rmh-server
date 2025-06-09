@@ -33,7 +33,7 @@ class LayoutController extends SiteController
 
         }else{
             $this->data['robots'] = 'noindex';
-            $this->data['pageTitle'] = 'Эфирный отчёт';
+            $this->data['pageTitle'] = 'Макет. Конструктор эфирной сетки';
 
             if( Auth::check() ){
 
@@ -56,8 +56,14 @@ class LayoutController extends SiteController
                     $this->data['companyType'] = $companyModel->type;
 
                     $this->data['page'] = 'layout';
+
+                    // dd( $this->data );
+
+
                     return view( 'layout', $this->data );
                 };
+
+
 
 
             }else{
