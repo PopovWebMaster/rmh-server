@@ -42,7 +42,7 @@ trait GetSubApplicationListTrait{
 
                 $release_list = [];
                 $modelRelease = SubApplicationRelease::where( 'sub_application_id', '=', $sub_application_id )->get();
-                foreach( $modelFiles as $model_release ){
+                foreach( $modelRelease as $model_release ){
 
                     $file_name = '';
                     if( count( $file_names ) > 0 ){

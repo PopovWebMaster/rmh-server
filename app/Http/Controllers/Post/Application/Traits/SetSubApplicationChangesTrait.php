@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Post\Application\Traits;
 
 use App\Models\SubApplication;
 use App\Models\SubApplicationFileName;
+use App\Models\SubApplicationDescription;
+
 
 
 
@@ -24,7 +26,7 @@ trait SetSubApplicationChangesTrait{
 
 
 
-        $file_names =       isset( $subApplication['file_names'] )? $subApplication['file_names']: null;
+        $file_names = isset( $subApplication['file_names'] )? $subApplication['file_names']: null;
 
         if( $file_names !== null ){
             for( $i = 0; $i < count( $file_names ); $i++ ){
@@ -41,6 +43,23 @@ trait SetSubApplicationChangesTrait{
 
             };
         };
+
+        $description = isset( $subApplication['description'] )? $subApplication['description']: null;
+
+        if( $description !== null ){
+            $model = SubApplicationDescription::where( 'sub_application_id', '=', $id )->first();
+            if( $model === null ){
+                $new_model = new SubApplicationDescription;
+                $new_model->sub_application_id = $id;
+                $new_model->description = $description;
+                $new_model->save();
+            }else{
+                $model->description = $description;
+                $model->save();
+            };
+        };
+
+
         // $type =             $subApplication['type'];
         // $type =             $subApplication['type'];
 
